@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { mergeProps } from "@base-ui/react/merge-props";
-import { useRender } from "@base-ui/react/use-render";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import type { ButtonHTMLAttributes, ReactElement } from "react";
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
+import type { VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
+import type { ButtonHTMLAttributes, ReactElement } from "react"
 
-import { cn } from "@/registry/kit/lib/utils";
+import { cn } from "@/registry/kit/lib/utils"
 
 export const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -41,7 +41,7 @@ export const buttonVariants = cva(
       },
     },
   },
-);
+)
 
 export interface ButtonProps
   extends
@@ -63,16 +63,16 @@ export function Button({
 }: ButtonProps): ReactElement {
   const type: ButtonHTMLAttributes<HTMLButtonElement>["type"] = render
     ? undefined
-    : "button";
+    : "button"
   const defaultProps = {
     className: cn(buttonVariants({ className, size, variant })),
     "data-slot": "button",
     type,
-  };
+  }
 
   return useRender({
     defaultTagName: "button",
     props: mergeProps<"button">(defaultProps, props),
     render,
-  });
+  })
 }

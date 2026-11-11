@@ -12,4 +12,11 @@ export default defineConfig({
     "fixtures/*/src/components/ui/**",
   ],
   options: { typeAware: true },
+  overrides: [
+    {
+      // Scripts run steps in order on purpose.
+      files: ["scripts/**"],
+      rules: { "eslint/no-await-in-loop": "off" },
+    },
+  ],
 });

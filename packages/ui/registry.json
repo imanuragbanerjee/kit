@@ -15,7 +15,8 @@
       "files": [
         {
           "path": "src/components/button.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
         }
       ]
     }

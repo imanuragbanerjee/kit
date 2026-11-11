@@ -12,6 +12,15 @@ export default defineConfig({
     ".changeset/*.md",
     "**/CHANGELOG.md",
   ],
+  overrides: [
+    {
+      // Registry sources follow the shadcn house style (no semicolons). The CLI
+      // only strips `"use client"` for `rsc: false` consumers when the directive
+      // has no trailing semicolon, so keep it that way. See AGENTS.md.
+      files: ["packages/ui/src/**"],
+      options: { semi: false },
+    },
+  ],
   sortTailwindcss: {
     functions: ["cn", "cva", "clsx"],
     stylesheet: "./packages/ui/src/styles/globals.css",

@@ -39,6 +39,24 @@ export const rules = {
 };
 
 /**
+ * Extra decisions for presets that include the React rules.
+ *
+ * @type {NonNullable<import("oxlint").OxlintConfig["rules"]>}
+ */
+export const reactRules = {
+  // Anchors and buttons passed through a `render` prop get their children from
+  // the host component (`<Button render={<a href="/" />}>Docs</Button>`), so
+  // this rule reports a false positive on every composed element.
+  "jsx-a11y/control-has-associated-label": "off",
+  // Components are function declarations: it is the idiom of every framework
+  // we use (Next.js pages and layouts, TanStack routes, Astro islands).
+  "react/function-component-definition": [
+    "error",
+    { namedComponents: "function-declaration" },
+  ],
+};
+
+/**
  * Framework-neutral core preset. Type-aware linting is a root option that
  * presets cannot carry, so set `options: { typeAware: true }` in your config.
  *

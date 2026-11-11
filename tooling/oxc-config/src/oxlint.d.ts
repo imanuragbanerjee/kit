@@ -1,6 +1,7 @@
 import type { OxlintConfig } from "oxlint";
 
 export declare const ignorePatterns: string[];
+export declare const reactRules: NonNullable<OxlintConfig["rules"]>;
 export declare const rules: NonNullable<OxlintConfig["rules"]>;
 
 declare const config: OxlintConfig;
