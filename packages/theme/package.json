@@ -1,0 +1,76 @@
+{
+  "name": "@anuragbanerjee/theme",
+  "version": "0.0.0",
+  "description": "Tailwind v4 theme for personal projects: shadcn colour mapping, fonts, typography and colour themes. CSS only.",
+  "keywords": [
+    "shadcn",
+    "tailwind",
+    "tailwind-v4",
+    "tailwindcss",
+    "theme"
+  ],
+  "homepage": "https://github.com/OWNER/kit/tree/main/packages/theme#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/kit/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/kit.git",
+    "directory": "packages/theme"
+  },
+  "files": [
+    "*.css",
+    "themes",
+    "README.md"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    "./base": {
+      "style": "./base.css",
+      "default": "./base.css"
+    },
+    "./fonts": {
+      "style": "./fonts.css",
+      "default": "./fonts.css"
+    },
+    "./typography": {
+      "style": "./typography.css",
+      "default": "./typography.css"
+    },
+    "./themes/*": {
+      "style": "./themes/*.css",
+      "default": "./themes/*.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "catalog:"
+  },
+  "peerDependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.5"
+  },
+  "peerDependenciesMeta": {
+    "@fontsource-variable/geist": {
+      "optional": true
+    },
+    "@fontsource-variable/geist-mono": {
+      "optional": true
+    },
+    "@tailwindcss/typography": {
+      "optional": true
+    }
+  }
+}

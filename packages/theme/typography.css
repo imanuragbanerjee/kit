@@ -1,0 +1,6 @@
+/*
+ * Opt-in prose styles (`prose` classes). Needs the peer dependency
+ * @tailwindcss/typography.
+ */
+
+@plugin "@tailwindcss/typography";
