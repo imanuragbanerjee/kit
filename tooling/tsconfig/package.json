@@ -1,0 +1,37 @@
+{
+  "name": "@anuragbanerjee/tsconfig",
+  "version": "0.0.0",
+  "description": "Shared tsconfig bases (base, react-library, Next.js, Astro, TanStack Start).",
+  "keywords": [
+    "tsconfig",
+    "typescript"
+  ],
+  "homepage": "https://github.com/OWNER/kit/tree/main/tooling/tsconfig#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/kit/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/kit.git",
+    "directory": "tooling/tsconfig"
+  },
+  "files": [
+    "*.json",
+    "README.md"
+  ],
+  "exports": {
+    "./base.json": "./base.json",
+    "./react-library.json": "./react-library.json",
+    "./nextjs.json": "./nextjs.json",
+    "./astro.json": "./astro.json",
+    "./tanstack-start.json": "./tanstack-start.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "typescript": ">=6.0.0"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "name": "@anuragbanerjee/oxc-config",
+  "version": "0.0.0",
+  "description": "Shared oxfmt and oxlint presets (core, Next.js, Astro, TanStack) for personal projects.",
+  "keywords": [
+    "config",
+    "oxc",
+    "oxfmt",
+    "oxlint",
+    "ultracite"
+  ],
+  "homepage": "https://github.com/OWNER/kit/tree/main/tooling/oxc-config#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/kit/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/kit.git",
+    "directory": "tooling/oxc-config"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    "./oxfmt": {
+      "types": "./src/oxfmt.d.ts",
+      "default": "./src/oxfmt.js"
+    },
+    "./oxlint": {
+      "types": "./src/oxlint.d.ts",
+      "default": "./src/oxlint.js"
+    },
+    "./oxlint/react": {
+      "types": "./src/oxlint-react.d.ts",
+      "default": "./src/oxlint-react.js"
+    },
+    "./oxlint/next": {
+      "types": "./src/oxlint-next.d.ts",
+      "default": "./src/oxlint-next.js"
+    },
+    "./oxlint/astro": {
+      "types": "./src/oxlint-astro.d.ts",
+      "default": "./src/oxlint-astro.js"
+    },
+    "./oxlint/tanstack": {
+      "types": "./src/oxlint-tanstack.d.ts",
+      "default": "./src/oxlint-tanstack.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ultracite": "^8.1.1"
+  },
+  "devDependencies": {
+    "@anuragbanerjee/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@astrojs/compiler-rs": ">=0.5.3",
+    "oxfmt": ">=0.78.0",
+    "oxlint": ">=1.93.0",
+    "oxlint-tsgolint": ">=7.0.2006"
+  },
+  "peerDependenciesMeta": {
+    "@astrojs/compiler-rs": {
+      "optional": true
+    },
+    "oxfmt": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    },
+    "oxlint-tsgolint": {
+      "optional": true
+    }
+  }
+}

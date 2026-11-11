@@ -1,0 +1,19 @@
+# https://lefthook.dev/configuration/
+
+# Fast, staged-only checks on commit; the full verify (incl. build) is `bun run verify`.
+pre-commit:
+  parallel: true
+  jobs:
+    - name: oxlint
+      glob: "*.{js,jsx,ts,tsx,astro}"
+      # Report only: autofix can rewrite staged code in ways that still
+      # typecheck but change behaviour. Fix on demand with `bun run lint:fix`.
+      run: bun oxlint --no-error-on-unmatched-pattern {staged_files}
+    - name: oxfmt
+      run: bun oxfmt --no-error-on-unmatched-pattern --write {staged_files}
+      stage_fixed: true
+
+pre-push:
+  jobs:
+    - name: typecheck
+      run: bun run typecheck
