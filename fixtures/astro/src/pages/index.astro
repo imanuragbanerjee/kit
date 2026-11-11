@@ -1,0 +1,23 @@
+---
+import { ButtonDemo } from "@/components/button-demo";
+
+import "@/styles/global.css";
+---
+
+<html lang="en" data-theme="ocean">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>kit fixture: Astro</title>
+  </head>
+  <!-- Base UI portals and iOS 26+ Safari backdrops need `position: relative`
+       on body and an isolated stacking context on the app root. -->
+  <body class="relative">
+    <div class="isolate min-h-dvh">
+      <main class="prose mx-auto max-w-xl p-8">
+        <h1>Astro fixture</h1>
+        <ButtonDemo client:load />
+      </main>
+    </div>
+  </body>
+</html>

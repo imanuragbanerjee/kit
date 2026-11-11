@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@import "@anuragbanerjee/theme/base";
+@import "@anuragbanerjee/theme/fonts";
+@import "@anuragbanerjee/theme/themes/default";
+@import "@anuragbanerjee/theme/themes/forest";

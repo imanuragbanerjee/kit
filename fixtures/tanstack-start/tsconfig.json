@@ -1,0 +1,8 @@
+{
+  "extends": "@anuragbanerjee/tsconfig/tanstack-start.json",
+  "compilerOptions": {
+    "paths": { "@/*": ["./src/*"] },
+    "types": ["vite/client"]
+  },
+  "include": ["src", "*.ts"]
+}
