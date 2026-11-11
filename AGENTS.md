@@ -56,4 +56,4 @@ Published packages: `tooling/oxc-config`, `tooling/tsconfig`, `packages/theme` (
 ## Not done yet
 
 - npm publishing: the packages do not exist on npm, and trusted publishing can only be configured once they do (first publish needs a token). Published versions record the repository URL permanently, so confirm it is `imanuragbanerjee/kit` first.
-- The repository is private. Check the safety scan (no secrets, emails or phone numbers in the tree or history) again before making it public.
+- Once the repository is public, never rewrite history on `main`: old commits stay reachable on GitHub through pull request references. Re-run the safety scan (no secrets, emails or phone numbers in the tree or history) before any change of visibility.

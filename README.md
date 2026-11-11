@@ -10,7 +10,7 @@ Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry
 | `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Source of the registry items (Button on Base UI)                     |
 | `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js, Astro and TanStack Start apps that consume it       |
 
-Not published to npm yet. The repository is private for now, at `imanuragbanerjee/kit`.
+Not published to npm yet. Third-party notices (shadcn/ui, MIT) are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Setup
 
@@ -33,6 +33,6 @@ See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsc
 
 Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), which any static host can serve; then `shadcn add https://<host>/button.json`. Locally, `shadcn add ./r/button.json` works after a build.
 
-GitHub-direct (`shadcn add imanuragbanerjee/kit/button`) reads the source `registry.json` with no build. It works against the private repository (the CLI uses your `gh` login); pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/button#<sha>`.
+GitHub-direct (`shadcn add imanuragbanerjee/kit/button`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/button#<sha>`.
 
 `bun run test:fixtures` builds the registry, serves `r/` from a throwaway server, installs the Button into each fixture and builds each one.
