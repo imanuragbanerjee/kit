@@ -1,0 +1,6 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "anuragbanerjee",
+  "homepage": "https://github.com/OWNER/kit",
+  "include": ["packages/ui/registry.json", "packages/theme/registry.json"]
+}

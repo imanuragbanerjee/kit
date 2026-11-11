@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A button built on Base UI's useRender, with cva variants. Compose with the render prop.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/components/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

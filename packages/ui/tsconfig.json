@@ -1,0 +1,11 @@
+{
+  "extends": "@anuragbanerjee/tsconfig/react-library.json",
+  "compilerOptions": {
+    "paths": {
+      "@/registry/kit/*": ["./src/*"],
+      "@/*": ["./src/*"]
+    },
+    "types": []
+  },
+  "include": ["src"]
+}
