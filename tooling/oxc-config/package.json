@@ -9,14 +9,14 @@
     "oxlint",
     "ultracite"
   ],
-  "homepage": "https://github.com/OWNER/kit/tree/main/tooling/oxc-config#readme",
+  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/tooling/oxc-config#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/kit/issues"
+    "url": "https://github.com/imanuragbanerjee/kit/issues"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/kit.git",
+    "url": "git+https://github.com/imanuragbanerjee/kit.git",
     "directory": "tooling/oxc-config"
   },
   "files": [

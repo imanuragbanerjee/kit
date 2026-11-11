@@ -9,14 +9,14 @@
     "tailwindcss",
     "theme"
   ],
-  "homepage": "https://github.com/OWNER/kit/tree/main/packages/theme#readme",
+  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/packages/theme#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/kit/issues"
+    "url": "https://github.com/imanuragbanerjee/kit/issues"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/kit.git",
+    "url": "git+https://github.com/imanuragbanerjee/kit.git",
     "directory": "packages/theme"
   },
   "files": [
