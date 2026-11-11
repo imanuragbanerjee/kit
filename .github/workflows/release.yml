@@ -1,8 +1,10 @@
 name: Release
 
+# Manual until npm trusted publishing is configured and the GitHub account is
+# renamed (published packages record the repository URL permanently). Restore
+# the `push: branches: [main]` trigger when ready.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
