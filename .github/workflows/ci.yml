@@ -33,8 +33,6 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      # Turborepo's task cache replays unchanged packages, per
-      # https://turborepo.dev/docs/guides/ci-vendors/github-actions
       - uses: actions/cache@v6
         with:
           path: .turbo
@@ -54,8 +52,6 @@ jobs:
       - name: Build
         run: bun run build
 
-      # Builds the registry, installs the Button into every fixture from a
-      # local server and builds each fixture.
       - name: Test registry install
         run: bun run test:fixtures
 

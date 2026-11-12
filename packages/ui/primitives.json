@@ -1,5 +1,0 @@
-{
-  "$comment": "Primitives synced from shadcn/ui. Never edit these files by hand; run `bun run ui:sync`.",
-  "style": "base-vega",
-  "primitives": ["button"]
-}

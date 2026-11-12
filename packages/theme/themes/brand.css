@@ -1,4 +1,4 @@
-/* PLACEHOLDER brand palette (indigo, hue 265). Replace the hue with the real brand colour. Opt in with data-theme="brand". */
+/* Placeholder: replace hue 265 with the brand colour. */
 [data-theme="brand"] {
   --background: oklch(0.99 0.004 265);
   --foreground: oklch(0.2 0.03 265);

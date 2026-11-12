@@ -1,22 +1,6 @@
 name: Release
 
-# Changesets flow, modelled on shadcn-ui/lint: a push to main with pending
-# changesets opens or updates a "Version Packages" PR; merging it publishes to
-# npm with provenance through OIDC trusted publishing (no npm token anywhere).
-#
-# The work is split so the job that can publish never shares a runner with the
-# project's dependencies:
-# - `check` (read-only) installs everything, picks the mode and, when
-#   publishing, runs the gates and packs the tarballs into an artifact.
-# - `version` opens the version PR. It can push a branch but not publish.
-# - `publish` holds id-token: write. It installs only the root tooling with
-#   --ignore-scripts and publishes the tarballs `check` packed.
-#
-# Manual until npm trusted publishing is configured (published packages record
-# the repository URL permanently, so confirm it first). Restore the
-# `push: branches: [main]` trigger when ready. Actions use major version tags
-# (`@v7`), and `changesets/action` its `v2` branch, which tracks the latest
-# 2.x. Dependabot proposes the next major.
+# Manual until npm trusted publishing is configured; then trigger on push to main.
 on:
   workflow_dispatch:
 
@@ -40,11 +24,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
-      # No dependency cache on purpose: what this job packs is published with
-      # provenance, so install from the registry, verified by the lockfile.
       - run: bun install --frozen-lockfile
-      # "version" (changesets pending), "publish" (an unpublished version) or
-      # "none"
       - id: mode
         uses: changesets/action/select-mode@v2
       - if: steps.mode.outputs.mode == 'publish'
@@ -62,8 +42,8 @@ jobs:
     if: needs.check.outputs.mode == 'version'
     runs-on: ubuntu-latest
     permissions:
-      contents: write # version PR branch
-      pull-requests: write # version PR
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -74,7 +54,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
-      # Root tooling only: changesets and its changelog plugin.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
       - uses: changesets/action/version@v2
         with:
@@ -100,8 +79,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
-      # Root tooling only, no lifecycle scripts: the changesets CLI is the only
-      # installed code this job runs.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
       - uses: changesets/action/publish@v2
         with:

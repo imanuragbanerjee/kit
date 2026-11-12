@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "build": "shadcn build --cwd ../.. ./registry.json --output ./r",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ui:sync": "shadcn add button --yes --overwrite"
   },
   "dependencies": {
     "@anuragbanerjee/theme": "workspace:*",

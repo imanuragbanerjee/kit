@@ -1,4 +1,2 @@
 [install]
-# Strict, pnpm-style layout: a package can only import what it declares, so
-# phantom (undeclared) dependencies fail locally instead of in a consumer.
 linker = "isolated"

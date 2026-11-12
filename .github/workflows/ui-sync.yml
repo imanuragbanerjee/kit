@@ -1,10 +1,6 @@
 name: UI primitives
 
-# The shadcn/ui primitives in packages/ui/src/components/ui are never edited by
-# hand. This re-syncs them from upstream and fails when they differ from what is
-# committed, which means either a hand edit or a new upstream version (then run
-# `bun run ui:sync` and commit). It is separate from CI on purpose: an upstream
-# release must not block unrelated pull requests.
+# Separate from CI so an upstream release cannot block unrelated pull requests.
 on:
   schedule:
     - cron: "0 6 * * 1"
