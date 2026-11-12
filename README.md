@@ -11,8 +11,6 @@ Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry
 | `packages/ui`           | `@anuragbanerjee/ui`            | never (private) | Home of our own registry components (none yet) |
 | `fixtures/*`            | `@anuragbanerjee/fixture-*`     | never (private) | A minimal Next.js app that consumes it         |
 
-The npm packages are not published yet.
-
 ## Setup
 
 Node and Bun versions come from `.tool-versions`.

@@ -37,9 +37,8 @@ Installed with the skills.sh CLI (`.agents/skills`, symlinked from `.claude/skil
 
 ## Releases
 
-Published to npm: `tooling/oxfmt-config`, `tooling/oxlint-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
+Published to npm: `tooling/oxfmt-config`, `tooling/oxlint-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` runs on every push to `main` and is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
 
-## Not done yet
+## Safety
 
-- npm publishing: trusted publishing can only be configured after the first publish, and published versions record the repository URL permanently.
 - Once the repository is public, never rewrite history on `main`. Re-run the safety scan (no secrets, emails or phone numbers in the tree or history) before any change of visibility.
