@@ -35,6 +35,10 @@ Items that are plain files (workflows, configs) go in `registry/registry.json` a
 
 Add a component item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
 
+## Agent skills
+
+Installed with the skills.sh CLI into `.agents/skills` (symlinked from `.claude/skills`), locked in `skills-lock.json`: `shadcn`, `turborepo`, `vercel-react-best-practices`, `vercel-composition-patterns`, `web-design-guidelines`, `writing-guidelines`. Update with `bunx skills update`; they are third-party files, so do not edit them and keep them out of oxfmt and oxlint.
+
 ## Themes
 
 Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, and a README row.
