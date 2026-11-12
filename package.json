@@ -95,5 +95,16 @@
     "typescript": "catalog:",
     "ultracite": "catalog:"
   },
-  "packageManager": "bun@1.4.4"
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "^1.4.4",
+      "onFail": "error"
+    },
+    "runtime": {
+      "name": "node",
+      "version": ">=26",
+      "onFail": "error"
+    }
+  }
 }

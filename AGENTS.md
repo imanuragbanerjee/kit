@@ -18,6 +18,7 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 - Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files. CI (`.github/workflows/ci.yml`) runs format check, lint, typecheck, build and `test:fixtures`, then fails if the fixtures drift from the registry source.
 - `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
 - `astro check` needs TypeScript 6, so TypeScript is pinned to `^6` in the catalog.
+- Exact tool versions live only in `.tool-versions`; workflows use `node-version-file` and `bun-version-file` pointing at it. `package.json` has `devEngines` ranges instead of a pinned `packageManager` (Turborepo requires one of the two). Bump Node or Bun by editing `.tool-versions` only.
 - `prepare` is `lefthook install || true` (it fails without a `.git`).
 - Bun uses the isolated linker (`bunfig.toml`), so a package can only import what it declares; an undeclared (phantom) dependency fails the build. Do not switch it back to hoisted.
 - Every external version lives once in the root `workspaces.catalog`; package manifests use `catalog:`. Exceptions: `peerDependencies` (explicit ranges) and `dependencies` of published packages (explicit, see Changesets below). `bun run taze` reports updates, `bun run taze:fix` writes them; TypeScript stays on 6 until `@astrojs/check` supports 7.

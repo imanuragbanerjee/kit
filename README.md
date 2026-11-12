@@ -14,7 +14,7 @@ Not published to npm yet. Third-party notices (shadcn/ui, MIT) are in [THIRD_PAR
 
 ## Setup
 
-Runtimes are pinned in `.tool-versions` (Node, Bun); `packageManager` pins Bun.
+The exact Node and Bun versions live only in `.tool-versions`; local tooling (mise, asdf) and every CI workflow read them from there. `package.json` carries `devEngines` ranges (`node >=26`, `bun ^1.4.4`), which Turborepo needs to detect the package manager but which are compatibility ranges, not pins.
 
 ```sh
 bun install
