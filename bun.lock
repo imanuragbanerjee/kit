@@ -58,15 +58,6 @@
         "@fontsource-variable/geist-mono": "catalog:",
         "tailwindcss": "catalog:",
       },
-      "peerDependencies": {
-        "@fontsource-variable/geist": "^5.3.0",
-        "@fontsource-variable/geist-mono": "^5.3.0",
-        "tailwindcss": "^4.3.5",
-      },
-      "optionalPeers": [
-        "@fontsource-variable/geist",
-        "@fontsource-variable/geist-mono",
-      ],
     },
     "packages/ui": {
       "name": "@anuragbanerjee/ui",

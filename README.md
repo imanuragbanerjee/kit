@@ -6,7 +6,7 @@ Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry
 | -------------------- | ---------------------------- | --------------- | --------------------------------------------------- |
 | `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next) |
 | `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs)        |
-| `packages/design`    | `@anuragbanerjee/design`     | npm             | Tailwind v4 CSS: colour mapping, fonts, themes      |
+| `packages/design`    | `@anuragbanerjee/design`     | never (private) | Tailwind v4 CSS: colour mapping, fonts, themes      |
 | `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)      |
 | `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | A minimal Next.js app that consumes it              |
 
@@ -35,4 +35,4 @@ Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), whi
 
 GitHub-direct (`shadcn add imanuragbanerjee/kit/theme-personal`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme-personal#<sha>`.
 
-`bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.
+Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.

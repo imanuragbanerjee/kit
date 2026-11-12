@@ -1,32 +1,21 @@
-# @anuragbanerjee/design
+# design
 
-Tailwind CSS v4 theme: the shadcn colour mapping, fonts and colour themes. CSS only, no build step.
+Private source of our theme registry items. Not published to npm: apps get a theme with the shadcn CLI.
 
 ```sh
-bun add @anuragbanerjee/design tailwindcss
-# optional peers: fonts
-bun add @fontsource-variable/geist @fontsource-variable/geist-mono
-# for shadcn components that animate (Dialog, Select, ...)
-bun add tw-animate-css shadcn
+bunx shadcn@latest init
+bunx shadcn@latest add imanuragbanerjee/kit/theme-personal
 ```
 
-```css
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+`shadcn init` writes the Tailwind colour mapping; the theme item then writes its colour variables to `:root` and `.dark`. To update an app later, re-run the `add` with `--overwrite` and review the diff. Pin a release with `#<tag-or-sha>`.
 
-@import "@anuragbanerjee/design/base";
-@import "@anuragbanerjee/design/fonts"; /* optional, needs the fontsource peers */
-@import "@anuragbanerjee/design/themes/base"; /* or themes/personal */
-```
+| Theme            | Contents                                  |
+| ---------------- | ----------------------------------------- |
+| `theme-base`     | Neutral palette                           |
+| `theme-personal` | Neutral palette with translucent surfaces |
 
-| Import            | Contents                                                            |
-| ----------------- | ------------------------------------------------------------------- |
-| `base`            | `@theme inline` colour and radius mapping, dark variant, base layer |
-| `fonts`           | Geist Sans and Mono via Fontsource, `--font-sans`, `--font-mono`    |
-| `themes/base`     | Neutral palette on `:root` and `.dark`                              |
-| `themes/personal` | Neutral palette with translucent surfaces on `:root` and `.dark`    |
+Files here:
 
-Import exactly one theme per app. Dark mode follows a `.dark` class on an ancestor.
-
-The same palettes ship as shadcn `registry:theme` items (`theme-base`, `theme-personal`) from the repository registry.
+- `themes/*.css` and `registry.json`: the two palettes as CSS and as `registry:theme` items. Keep them identical.
+- `base.css`: the `@theme inline` colour and radius mapping, dark variant and base layer. The Next fixture and `packages/ui` import it.
+- `fonts.css`: Geist Sans and Mono through Fontsource, imported by the fixture.

@@ -6,7 +6,7 @@ Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](READM
 
 - `tooling/oxc-config`: oxfmt preset (spread it, oxfmt has no `extends`) and oxlint presets `./oxlint`, `./oxlint/{react,next}`. Raw JS plus hand-written `.d.ts`, no build. The framework presets include Ultracite's `shadcn` preset, so every project that lints with them needs `@shadcn/lint` installed.
 - `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
-- `packages/design`: CSS only; every export lists `style` and `default` conditions.
+- `packages/design` (private): CSS only; source of the theme registry items, plus the colour mapping and fonts that the fixture and `packages/ui` import.
 - `packages/ui` (private): our own components and `registry.json`, plus the vendored shadcn primitives in `src/components/ui`.
 - `fixtures/*` (private): a Next.js app; their `src/components/ui/button.tsx` comes from `shadcn add`.
 - Root `registry.json` only has `name`, `homepage` and `include`.
@@ -34,11 +34,11 @@ Add an item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/
 
 ## Themes
 
-Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, a README row and a `minor` changeset.
+Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, and a README row.
 
 ## Releases
 
-Published: `tooling/oxc-config`, `tooling/tsconfig`, `packages/design`. Add a changeset with `bun run changeset`. `release.yml` (split `check`, `version`, `publish` jobs, manual for now) is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm because trusted publishing and provenance are npm features. Never publish by hand or from an agent session.
+Published to npm: `tooling/oxc-config` and `tooling/tsconfig`. Themes are delivered through the registry only. Add a changeset with `bun run changeset`. `release.yml` (split `check`, `version`, `publish` jobs, manual for now) is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm because trusted publishing and provenance are npm features. Never publish by hand or from an agent session.
 
 ## Not done yet
 
