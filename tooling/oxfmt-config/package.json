@@ -1,0 +1,47 @@
+{
+  "name": "@anuragbanerjee/oxfmt-config",
+  "version": "0.0.0",
+  "description": "Shared oxfmt options (spread into your own config).",
+  "keywords": [
+    "config",
+    "oxc",
+    "oxfmt"
+  ],
+  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/tooling/oxfmt-config#readme",
+  "bugs": {
+    "url": "https://github.com/imanuragbanerjee/kit/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imanuragbanerjee/kit.git",
+    "directory": "tooling/oxfmt-config"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@anuragbanerjee/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "oxfmt": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "oxfmt": ">=0.78.0 <1"
+  }
+}

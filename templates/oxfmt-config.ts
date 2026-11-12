@@ -1,4 +1,4 @@
-import base, { ignorePatterns } from "@anuragbanerjee/oxc-config/oxfmt";
+import base, { ignorePatterns } from "@anuragbanerjee/oxfmt-config";
 import { defineConfig } from "oxfmt";
 
 export default defineConfig({

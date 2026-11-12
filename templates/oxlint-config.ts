@@ -1,5 +1,5 @@
-import { ignorePatterns } from "@anuragbanerjee/oxc-config/oxlint";
-import next from "@anuragbanerjee/oxc-config/oxlint/next";
+import { ignorePatterns } from "@anuragbanerjee/oxlint-config";
+import next from "@anuragbanerjee/oxlint-config/next";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({

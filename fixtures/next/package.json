@@ -23,7 +23,7 @@
     "tw-animate-css": "catalog:"
   },
   "devDependencies": {
-    "@anuragbanerjee/oxc-config": "workspace:*",
+    "@anuragbanerjee/oxlint-config": "workspace:*",
     "@anuragbanerjee/tsconfig": "workspace:*",
     "@shadcn/lint": "catalog:",
     "@tailwindcss/postcss": "catalog:",

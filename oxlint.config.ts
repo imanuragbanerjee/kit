@@ -1,5 +1,5 @@
-import { ignorePatterns } from "@anuragbanerjee/oxc-config/oxlint";
-import react from "@anuragbanerjee/oxc-config/oxlint/react";
+import { ignorePatterns } from "@anuragbanerjee/oxlint-config";
+import react from "@anuragbanerjee/oxlint-config/react";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
