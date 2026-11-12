@@ -36,7 +36,7 @@ Add an item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/
 
 ## Themes
 
-Add `packages/design/themes/<name>.css` (light on `[data-theme="<name>"]`, dark on `.dark [data-theme="<name>"], [data-theme="<name>"].dark`), a matching `theme-<name>` item in `packages/design/registry.json`, a README row and a `minor` changeset.
+Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, a README row and a `minor` changeset.
 
 ## Releases
 

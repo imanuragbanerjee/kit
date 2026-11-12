@@ -17,8 +17,7 @@ bun add tw-animate-css shadcn
 
 @import "@anuragbanerjee/design/base";
 @import "@anuragbanerjee/design/fonts"; /* optional, needs the fontsource peers */
-@import "@anuragbanerjee/design/themes/base";
-@import "@anuragbanerjee/design/themes/personal";
+@import "@anuragbanerjee/design/themes/base"; /* or themes/personal */
 ```
 
 | Import            | Contents                                                            |
@@ -26,8 +25,8 @@ bun add tw-animate-css shadcn
 | `base`            | `@theme inline` colour and radius mapping, dark variant, base layer |
 | `fonts`           | Geist Sans and Mono via Fontsource, `--font-sans`, `--font-mono`    |
 | `themes/base`     | Neutral palette on `:root` and `.dark`                              |
-| `themes/personal` | Placeholder indigo palette, opt in with `data-theme="personal"`     |
+| `themes/personal` | Placeholder indigo palette on `:root` and `.dark`                   |
 
-Dark mode follows a `.dark` class on an ancestor. Pair a theme with it, for example `<html class="dark" data-theme="personal">`.
+Import exactly one theme per app. Dark mode follows a `.dark` class on an ancestor.
 
-The same palettes ship as shadcn `registry:theme` items (`theme-base`, `theme-personal`) from the repository registry. Installed that way they write to `:root` and `.dark`, replacing the active palette, whereas the CSS files scope `personal` to `[data-theme="personal"]`.
+The same palettes ship as shadcn `registry:theme` items (`theme-base`, `theme-personal`) from the repository registry.

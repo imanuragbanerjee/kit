@@ -1,5 +1,5 @@
 /* Placeholder palette: replace hue 265 with your own colours. */
-[data-theme="personal"] {
+:root {
   --background: oklch(0.99 0.004 265);
   --foreground: oklch(0.2 0.03 265);
   --card: oklch(0.997 0.003 265);
@@ -33,8 +33,7 @@
   --sidebar-ring: oklch(0.65 0.14 265);
 }
 
-.dark [data-theme="personal"],
-[data-theme="personal"].dark {
+.dark {
   --background: oklch(0.17 0.02 265);
   --foreground: oklch(0.97 0.005 265);
   --card: oklch(0.21 0.025 265);
