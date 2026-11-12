@@ -8,7 +8,7 @@
     "dev": "astro dev",
     "lint": "oxlint .",
     "preview": "astro preview",
-    "test:registry": "shadcn add ../../r/button.json --yes --overwrite && bun run build",
+    "test:registry": "shadcn add button --yes --overwrite && bun run build",
     "typecheck": "astro check"
   },
   "dependencies": {

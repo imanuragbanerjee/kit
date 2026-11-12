@@ -17,43 +17,41 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: bun run format:check
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: bun run lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: bun run typecheck
+
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .tool-versions
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version-file: .tool-versions
-
-      - run: bun install --frozen-lockfile
-
+      - uses: ./.github/actions/setup
       - uses: actions/cache@v6
         with:
           path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-turbo-
-
-      - name: Check formatting
-        run: bun run format:check
-
-      - name: Lint
-        run: bun run lint
-
-      - name: Typecheck
-        run: bun run typecheck
-
-      - name: Build
-        run: bun run build
-
-      - name: Test registry install
-        run: bun run test:fixtures
-
-      - name: Fixtures match the registry source
-        run: git diff --exit-code -- fixtures
+      - run: bun run build
+      - run: bun run registry:validate

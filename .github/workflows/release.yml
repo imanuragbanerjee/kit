@@ -29,8 +29,6 @@ jobs:
         uses: changesets/action/select-mode@v2
       - if: steps.mode.outputs.mode == 'publish'
         run: bun run verify
-      - if: steps.mode.outputs.mode == 'publish'
-        run: bun run test:fixtures
       - id: pack
         if: steps.mode.outputs.mode == 'publish'
         uses: changesets/action/pack@v2

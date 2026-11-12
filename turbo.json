@@ -24,10 +24,6 @@
       "cache": false
     },
     "test:registry": {
-      "dependsOn": ["@anuragbanerjee/ui#build"],
-      "cache": false
-    },
-    "ui:sync": {
       "cache": false
     }
   }

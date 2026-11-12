@@ -1,19 +1,4 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "items": [
-    {
-      "name": "button",
-      "type": "registry:ui",
-      "title": "Button",
-      "description": "The shadcn/ui Button on Base UI (base-vega), synced from upstream. Compose with the render prop.",
-      "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
-      "files": [
-        {
-          "path": "src/components/ui/button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/button.tsx"
-        }
-      ]
-    }
-  ]
+  "items": []
 }

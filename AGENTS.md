@@ -7,7 +7,7 @@ Personal monorepo (Bun workspaces + Turborepo + Changesets). Read [README.md](RE
 - `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,shadcn}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules; every framework preset also includes the `@shadcn/lint` design-system rules (Ultracite's `shadcn` preset, with the plugin resolved from this package via `import.meta.resolve` so consumers install nothing extra). Components and the theme are discovered from each project's `components.json`; a UI source directory needs an override that turns off `shadcn/no-arbitrary-values`, `shadcn/no-restyle` and `shadcn/require-static-classes` (see the root `oxlint.config.ts`).
 - `tooling/tsconfig`: `@anuragbanerjee/tsconfig`. JSON bases, no `include`/`paths`/`types` (consumers set them).
 - `packages/theme`: `@anuragbanerjee/theme`. CSS only. Every export lists `style` and `default` conditions.
-- `packages/ui`: `@anuragbanerjee/ui`, **private**. Upstream primitives in `src/components/ui`, our own components in `src/components`, `registry.json` with the items. `components.json` uses style `base-vega`.
+- `packages/ui`: `@anuragbanerjee/ui`, **private**. Our own components (none yet) on top of the vendored upstream primitives in `src/components/ui`, `registry.json` with the items. `components.json` uses style `base-vega`.
 - `fixtures/*`: private apps. `src/components/ui/button.tsx` in each is written by `shadcn add` from the local registry; do not hand-edit it.
 - Root `registry.json`: only `name`, `homepage` and `include`. Add items to the included files, not here.
 
@@ -15,7 +15,7 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 
 ## Conventions
 
-- Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files. CI (`.github/workflows/ci.yml`) runs format check, lint, typecheck, build and `test:fixtures`, then fails if the fixtures drift from the registry source.
+- Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files. CI (`.github/workflows/ci.yml`) runs format, lint, typecheck and build as parallel jobs that share the `.github/actions/setup` composite action.
 - `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
 - `astro check` needs TypeScript 6, so TypeScript is pinned to `^6` in the catalog.
 - Exact tool versions live only in `.tool-versions`; workflows use `node-version-file` and `bun-version-file` pointing at it. `package.json` has `devEngines` ranges instead of a pinned `packageManager` (Turborepo requires one of the two). Bump Node or Bun by editing `.tool-versions` only.
@@ -27,22 +27,21 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 - Take reference from public, well-maintained projects (shadcn-ui/ui, shadcn-ui/lint, Ultracite), not from company-internal repos.
 - Commit style: `chore:` / `feat:` / `fix:`, small and logical.
 
-## UI primitives and registry items
+## Registry items
 
-**Core primitives are never edited by hand.** Everything in `packages/ui/src/components/ui` is shadcn/ui `base-vega`, written by `shadcn add` and excluded from oxfmt and oxlint (`**/components/ui`). It only changes through `bun run ui:sync`, a Turborepo task that runs each `ui:sync` script (`shadcn add <names> --overwrite`, the same idea as buddy's `ui-add` and next-forge's `bump-ui`). `bun run ui:check` syncs and runs `git diff --exit-code`, so a committed hand edit or a newer upstream version fails it. If a primitive needs different behaviour, build a custom component that wraps it.
+**shadcn/ui primitives are vendored for development only and never edited by hand** (the next-forge and ai-elements model). `packages/ui/src/components/ui` holds the upstream `base-vega` files written by `shadcn add`, so our own components compile and lint against them; `**/components/ui` is excluded from oxfmt and oxlint. `bun run ui:sync` re-fetches them (add a name to that script when a component starts using a new primitive). The weekly `upstream.yml` runs the sync and fails on a diff, which means a hand edit or a newer upstream, and also re-installs the Button into each fixture. If a primitive needs different behaviour, build a custom component that wraps it.
 
-The primitives are React-only, not framework-specific: shadcn publishes one component set per library base (`base`, `radix`, `aria`) and the same `button.tsx` works in Next.js and Astro (the two fixtures hold byte-identical copies). If something genuinely needs a framework API (for example `next/link`), make it a separate item with its own name instead of forking a primitive.
+Registry items do not republish primitives. They declare `registryDependencies: ["button"]`, and the CLI fetches the primitive from shadcn's registry in the consumer's style, so consumers always get upstream (ai-elements does the same for `message`: `registryDependencies: ['button', 'button-group', 'tooltip']`). Each fixture holds the Button that `shadcn add` wrote, like any app would.
 
-Add a primitive: add its name to the `ui:sync` script in `packages/ui/package.json`, run `bun run ui:sync`, then add the registry item (below). Commit the generated file as is.
+The primitives are React-only, not framework-specific: shadcn publishes one component set per library base (`base`, `radix`, `aria`) and the same `button.tsx` works in Next.js and Astro. If something genuinely needs a framework API (for example `next/link`), make it a separate item.
 
-Custom components (ours, not upstream) live in `packages/ui/src/components/`, outside `ui/`. They are formatted and linted normally. Import the class helper like upstream does: `import { cn } from "cn"` (the `cn` package, not a local `utils` file). With `rsc: false` the shadcn CLI strips `"use client"` only when the directive has no trailing semicolon, so format any custom component that needs the directive without semicolons (an oxfmt override for that file).
+Our own components live in `packages/ui/src` outside `components/ui`, and are formatted and linted normally. Import the class helper like upstream does: `import { cn } from "cn"`. With `rsc: false` the shadcn CLI strips `"use client"` only when the directive has no trailing semicolon, so format a component that needs the directive without semicolons (an oxfmt override for that file).
 
-Add an item (primitive or custom):
+Add an item:
 
-1. Add the item to `packages/ui/registry.json`: `name`, `type`, `title`, `description`, `dependencies` (npm), `files: [{ "path": "src/components/ui/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]`. The `@ui/` target is required: without it a path containing the `ui` folder is nested wrongly. Item names are unique across all included files.
+1. Add it to `packages/ui/registry.json`: `name`, `type`, `title`, `description`, `dependencies` (npm), `registryDependencies` (shadcn primitives), and `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]`. The `@ui/` target is required: without it a path containing the `ui` folder is nested wrongly. Item names are unique across all included files.
 2. `bun run registry:build && bun run registry:validate`.
-3. Add the item to each fixture's `test:registry` script, run `bun run test:fixtures`, commit the changed fixture files.
-4. Dependencies on other items in this registry must use the full GitHub address (`imanuragbanerjee/kit/<item>`), which does not resolve for hosted registries; prefer self-contained items.
+3. Dependencies on other items in this registry must use the full GitHub address (`imanuragbanerjee/kit/<item>`), which does not resolve for hosted registries; prefer self-contained items.
 
 `r/` is generated by `shadcn build` and is git-ignored. GitHub-direct installs read the source files, and a hosting app will rebuild `r/`.
 
