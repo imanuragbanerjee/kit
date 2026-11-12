@@ -8,6 +8,7 @@
     "dev": "next dev",
     "lint": "oxlint .",
     "start": "next start",
+    "test:registry": "shadcn add ../../r/button.json --yes --overwrite && bun run build",
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {

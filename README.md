@@ -35,4 +35,4 @@ Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), whi
 
 GitHub-direct (`shadcn add imanuragbanerjee/kit/button`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/button#<sha>`.
 
-`bun run test:fixtures` builds the registry, serves `r/` from a throwaway server, installs the Button into each fixture and builds each one.
+`bun run test:fixtures` (a Turborepo task) builds the registry, installs `r/button.json` into each fixture with `shadcn add` and builds each one.

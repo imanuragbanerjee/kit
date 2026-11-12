@@ -17,7 +17,7 @@ export default defineConfig({
     "**/r",
     ...synced,
     // Written by `shadcn add` from the local registry; lint fixes would be
-    // replayed on the next install (see scripts/test-fixtures.ts).
+    // replayed on the next install (`bun run test:fixtures`).
     "fixtures/*/src/components/ui/**",
   ],
   options: { typeAware: true },
@@ -33,11 +33,6 @@ export default defineConfig({
         "shadcn/no-restyle": "off",
         "shadcn/require-static-classes": "off",
       },
-    },
-    {
-      // Scripts run steps in order on purpose.
-      files: ["scripts/**"],
-      rules: { "eslint/no-await-in-loop": "off" },
     },
   ],
 });

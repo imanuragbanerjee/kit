@@ -14,8 +14,9 @@ name: Release
 #
 # Manual until npm trusted publishing is configured (published packages record
 # the repository URL permanently, so confirm it first). Restore the
-# `push: branches: [main]` trigger when ready. Every action is pinned to a
-# commit SHA; Dependabot keeps the pins current.
+# `push: branches: [main]` trigger when ready. Actions use major version tags
+# (`@v7`). `changesets/action` publishes no floating v2 tag, so it uses the
+# exact tag (`@v2.1.2`). Dependabot proposes updates for both.
 on:
   workflow_dispatch:
 
@@ -32,11 +33,11 @@ jobs:
       mode: ${{ steps.mode.outputs.mode }}
       pack-dir-artifact-id: ${{ steps.pack.outputs.pack-dir-artifact-id }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
       # No dependency cache on purpose: what this job packs is published with
@@ -45,14 +46,14 @@ jobs:
       # "version" (changesets pending), "publish" (an unpublished version) or
       # "none"
       - id: mode
-        uses: changesets/action/select-mode@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        uses: changesets/action/select-mode@v2.1.2
       - if: steps.mode.outputs.mode == 'publish'
         run: bun run verify
       - if: steps.mode.outputs.mode == 'publish'
         run: bun run test:fixtures
       - id: pack
         if: steps.mode.outputs.mode == 'publish'
-        uses: changesets/action/pack@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        uses: changesets/action/pack@v2.1.2
         with:
           publish-plan-artifact-id: ${{ steps.mode.outputs.publish-plan-artifact-id }}
 
@@ -64,18 +65,18 @@ jobs:
       contents: write # version PR branch
       pull-requests: write # version PR
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
       # Root tooling only: changesets and its changelog plugin.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
-      - uses: changesets/action/version@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+      - uses: changesets/action/version@v2.1.2
         with:
           commit-message: "chore(release): version packages"
           pr-title: "chore(release): version packages"
@@ -89,21 +90,19 @@ jobs:
       contents: write # tags, GitHub releases
       id-token: write # npm trusted publishing + provenance
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
           registry-url: https://registry.npmjs.org
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
-      # Trusted publishing needs npm >= 11.5.1.
-      - run: npm install -g npm@^11.5.1
       # Root tooling only, no lifecycle scripts: the changesets CLI is the only
       # installed code this job runs.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
-      - uses: changesets/action/publish@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+      - uses: changesets/action/publish@v2.1.2
         with:
           pack-dir-artifact-id: ${{ needs.check.outputs.pack-dir-artifact-id }}

@@ -29,6 +29,7 @@
       "@tailwindcss/vite": "^4.3.5",
       "@tanstack/react-router": "^1.170.46",
       "@tanstack/react-start": "^1.169.5",
+      "@types/bun": "^1.4.4",
       "@types/node": "^26.6.6",
       "@types/react": "^19.3.0",
       "@types/react-dom": "^19.3.0",
@@ -69,12 +70,12 @@
     "release": "changeset publish",
     "taze": "taze",
     "taze:fix": "taze -w -i",
-    "test:fixtures": "bun scripts/test-fixtures.ts",
+    "test:fixtures": "turbo run test:registry",
     "typecheck": "turbo run typecheck && tsc --noEmit",
     "verify": "bun run format:check && bun run lint && bun run typecheck && bun run build",
     "version-packages": "changeset version",
     "ui:sync": "bun scripts/sync-ui.ts",
-    "ui:check": "bun scripts/sync-ui.ts --check"
+    "ui:check": "bun run ui:sync && git diff --exit-code -- packages/ui/src/components/ui"
   },
   "devDependencies": {
     "@anuragbanerjee/oxc-config": "workspace:*",
@@ -82,6 +83,7 @@
     "@astrojs/compiler-rs": "catalog:",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
+    "@types/bun": "catalog:",
     "@types/node": "catalog:",
     "lefthook": "catalog:",
     "oxfmt": "catalog:",
