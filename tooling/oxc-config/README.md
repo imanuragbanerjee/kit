@@ -1,6 +1,6 @@
 # @anuragbanerjee/oxc-config
 
-Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react`, `next`, `astro` and `tanstack` presets.
+Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react`, `next` and `astro` presets.
 
 ```sh
 bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint
@@ -25,14 +25,13 @@ The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` re
 
 ## oxlint
 
-| Import                                       | Contents                                                           |
-| -------------------------------------------- | ------------------------------------------------------------------ |
-| `@anuragbanerjee/oxc-config/oxlint`          | Ultracite `core` plus shared rule decisions                        |
-| `@anuragbanerjee/oxc-config/oxlint/react`    | `core` + `react` + `shadcn`                                        |
-| `@anuragbanerjee/oxc-config/oxlint/next`     | `core` + `react` + `shadcn` + `next`                               |
-| `@anuragbanerjee/oxc-config/oxlint/astro`    | `core` + `react` + `shadcn` + `astro`                              |
-| `@anuragbanerjee/oxc-config/oxlint/tanstack` | `core` + `react` + `shadcn` + `tanstack`                           |
-| `@anuragbanerjee/oxc-config/oxlint/shadcn`   | Only the [`@shadcn/lint`](https://github.com/shadcn-ui/lint) rules |
+| Import                                     | Contents                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| `@anuragbanerjee/oxc-config/oxlint`        | Ultracite `core` plus shared rule decisions                        |
+| `@anuragbanerjee/oxc-config/oxlint/react`  | `core` + `react` + `shadcn`                                        |
+| `@anuragbanerjee/oxc-config/oxlint/next`   | `core` + `react` + `shadcn` + `next`                               |
+| `@anuragbanerjee/oxc-config/oxlint/astro`  | `core` + `react` + `shadcn` + `astro`                              |
+| `@anuragbanerjee/oxc-config/oxlint/shadcn` | Only the [`@shadcn/lint`](https://github.com/shadcn-ui/lint) rules |
 
 ```ts
 // oxlint.config.ts

@@ -4,7 +4,7 @@ Personal monorepo (Bun workspaces + Turborepo + Changesets). Read [README.md](RE
 
 ## Layout
 
-- `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,tanstack,shadcn}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules; every framework preset also includes the `@shadcn/lint` design-system rules (Ultracite's `shadcn` preset, with the plugin resolved from this package via `import.meta.resolve` so consumers install nothing extra). Components and the theme are discovered from each project's `components.json`; a UI source directory needs an override that turns off `shadcn/no-arbitrary-values`, `shadcn/no-restyle` and `shadcn/require-static-classes` (see the root `oxlint.config.ts`).
+- `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,shadcn}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules; every framework preset also includes the `@shadcn/lint` design-system rules (Ultracite's `shadcn` preset, with the plugin resolved from this package via `import.meta.resolve` so consumers install nothing extra). Components and the theme are discovered from each project's `components.json`; a UI source directory needs an override that turns off `shadcn/no-arbitrary-values`, `shadcn/no-restyle` and `shadcn/require-static-classes` (see the root `oxlint.config.ts`).
 - `tooling/tsconfig`: `@anuragbanerjee/tsconfig`. JSON bases, no `include`/`paths`/`types` (consumers set them).
 - `packages/theme`: `@anuragbanerjee/theme`. CSS only. Every export lists `style` and `default` conditions.
 - `packages/ui`: `@anuragbanerjee/ui`, **private**. Upstream primitives in `src/components/ui` (see `primitives.json`), our own components beside them, `registry.json` with the items. `components.json` uses style `base-vega`.
@@ -31,7 +31,7 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 
 **Core primitives are never edited by hand.** `packages/ui/src/components/ui/<name>.tsx` files listed in `packages/ui/primitives.json` are the shadcn/ui `base-vega` components written by `shadcn add`. They are excluded from oxfmt and oxlint, and they only change through `bun run ui:sync` (re-fetches them from upstream). `bun run ui:check` syncs and fails if the result differs from what is committed, which catches hand edits. If a primitive needs different behaviour, build a custom component that wraps it instead.
 
-The primitives are React-only, not framework-specific: shadcn publishes one component set per style and the same `button.tsx` works in Next.js, Astro and TanStack Start (the three fixtures hold byte-identical copies). If something genuinely needs a framework API (for example `next/link`), make it a separate item with its own name instead of forking a primitive.
+The primitives are React-only, not framework-specific: shadcn publishes one component set per style and the same `button.tsx` works in Next.js and Astro (the two fixtures hold byte-identical copies). If something genuinely needs a framework API (for example `next/link`), make it a separate item with its own name instead of forking a primitive.
 
 Add a primitive: add its name to `primitives.json`, run `bun run ui:sync`, then add the registry item (below). Commit the generated file as is.
 

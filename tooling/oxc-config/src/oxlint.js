@@ -9,8 +9,6 @@ export const ignorePatterns = [
   ...(core.ignorePatterns ?? []),
   "**/.agents",
   "**/.claude",
-  "**/.nitro",
-  "**/.tanstack",
 ];
 
 /**
@@ -21,7 +19,7 @@ export const ignorePatterns = [
  */
 export const rules = {
   // The shadcn `cn` helper is a declaration while `export const GET: APIRoute`
-  // (Astro) and route definitions (TanStack) are idiomatic as expressions;
+  // (Astro) are idiomatic as expressions;
   // one style cannot cover both.
   "eslint/func-style": "off",
   // Alphabetising keys would scramble JSON-LD, content schemas and config
@@ -49,7 +47,7 @@ export const reactRules = {
   // this rule reports a false positive on every composed element.
   "jsx-a11y/control-has-associated-label": "off",
   // Components are function declarations: it is the idiom of every framework
-  // we use (Next.js pages and layouts, TanStack routes, Astro islands).
+  // we use (Next.js pages and layouts, Astro islands).
   "react/function-component-definition": [
     "error",
     { namedComponents: "function-declaration" },

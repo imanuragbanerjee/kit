@@ -1,7 +1,7 @@
 {
   "name": "@anuragbanerjee/oxc-config",
   "version": "0.0.0",
-  "description": "Shared oxfmt and oxlint presets (core, Next.js, Astro, TanStack) for personal projects.",
+  "description": "Shared oxfmt and oxlint presets (core, React, Next.js, Astro, shadcn) for personal projects.",
   "keywords": [
     "config",
     "oxc",
@@ -44,10 +44,6 @@
     "./oxlint/astro": {
       "types": "./src/oxlint-astro.d.ts",
       "default": "./src/oxlint-astro.js"
-    },
-    "./oxlint/tanstack": {
-      "types": "./src/oxlint-tanstack.d.ts",
-      "default": "./src/oxlint-tanstack.js"
     },
     "./package.json": "./package.json",
     "./oxlint/shadcn": {

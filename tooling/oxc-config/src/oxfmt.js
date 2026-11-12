@@ -20,13 +20,10 @@ export const ignorePatterns = [
   ".astro",
   ".claude",
   ".next",
-  ".nitro",
   ".output",
-  ".tanstack",
   ".turbo",
   "bun.lock",
   "dist",
-  "routeTree.gen.ts",
 ];
 
 /** @type {import("oxfmt").OxfmtConfig} */

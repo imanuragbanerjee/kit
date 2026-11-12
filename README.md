@@ -1,14 +1,14 @@
 # kit
 
-Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose (Next.js, Astro and TanStack Start are all covered by fixtures).
+Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose (Next.js and Astro are covered by fixtures).
 
 | Path                 | Package                      | Published       | What                                                                             |
 | -------------------- | ---------------------------- | --------------- | -------------------------------------------------------------------------------- |
-| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next, astro, tanstack)             |
-| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs, astro, tanstack-start)              |
+| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next, astro)                       |
+| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs, astro)                              |
 | `packages/theme`     | `@anuragbanerjee/theme`      | npm             | Tailwind v4 CSS: colour mapping, fonts, typography, themes                       |
 | `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Registry sources: upstream shadcn/ui primitives (Button) plus our own components |
-| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js, Astro and TanStack Start apps that consume it                   |
+| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js and Astro apps that consume it                                   |
 
 Not published to npm yet. Third-party notices (shadcn/ui, MIT) are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 

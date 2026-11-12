@@ -6,8 +6,6 @@ dist/
 .next/
 .astro/
 .output/
-.nitro/
-.tanstack/
 .turbo/
 *.tsbuildinfo
 .cache/

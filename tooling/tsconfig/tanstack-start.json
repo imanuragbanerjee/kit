@@ -1,9 +1,0 @@
-{
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "TanStack Start",
-  "extends": "./react-library.json",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
-  }
-}

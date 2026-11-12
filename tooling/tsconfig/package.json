@@ -1,7 +1,7 @@
 {
   "name": "@anuragbanerjee/tsconfig",
   "version": "0.0.0",
-  "description": "Shared tsconfig bases (base, react-library, Next.js, Astro, TanStack Start).",
+  "description": "Shared tsconfig bases (base, react-library, Next.js, Astro).",
   "keywords": [
     "tsconfig",
     "typescript"
@@ -25,7 +25,6 @@
     "./react-library.json": "./react-library.json",
     "./nextjs.json": "./nextjs.json",
     "./astro.json": "./astro.json",
-    "./tanstack-start.json": "./tanstack-start.json",
     "./package.json": "./package.json"
   },
   "publishConfig": {
