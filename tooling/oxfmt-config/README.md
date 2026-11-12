@@ -1,10 +1,14 @@
 # @anuragbanerjee/oxfmt-config
 
-Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) options. For linting see `@anuragbanerjee/oxlint-config`.
+Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) options. For linting, see [`@anuragbanerjee/oxlint-config`](https://www.npmjs.com/package/@anuragbanerjee/oxlint-config).
+
+## Install
 
 ```sh
 bun add -d @anuragbanerjee/oxfmt-config oxfmt
 ```
+
+## Usage
 
 oxfmt has no `extends`, so spread the preset into your own config:
 
@@ -20,3 +24,5 @@ export default defineConfig({
 ```
 
 The spread is shallow: overriding `sortImports` or `sortTailwindcss` replaces the whole nested object.
+
+Part of [kit](https://github.com/imanuragbanerjee/kit).
