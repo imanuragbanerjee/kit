@@ -10,6 +10,7 @@
         "@astrojs/compiler-rs": "catalog:",
         "@changesets/changelog-github": "catalog:",
         "@changesets/cli": "catalog:",
+        "@shadcn/lint": "catalog:",
         "@types/node": "catalog:",
         "lefthook": "catalog:",
         "oxfmt": "catalog:",
@@ -44,6 +45,7 @@
         "@anuragbanerjee/oxc-config": "workspace:*",
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@astrojs/check": "catalog:",
+        "@shadcn/lint": "catalog:",
         "@types/node": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
@@ -69,6 +71,7 @@
       "devDependencies": {
         "@anuragbanerjee/oxc-config": "workspace:*",
         "@anuragbanerjee/tsconfig": "workspace:*",
+        "@shadcn/lint": "catalog:",
         "@tailwindcss/postcss": "catalog:",
         "@types/node": "catalog:",
         "@types/react": "catalog:",
@@ -126,11 +129,11 @@
       "name": "@anuragbanerjee/oxc-config",
       "version": "0.0.0",
       "dependencies": {
-        "@shadcn/lint": "^0.2.5",
         "ultracite": "^8.2.0",
       },
       "devDependencies": {
         "@anuragbanerjee/tsconfig": "workspace:*",
+        "@shadcn/lint": "catalog:",
         "@types/node": "catalog:",
         "oxfmt": "catalog:",
         "oxlint": "catalog:",
@@ -138,12 +141,14 @@
       },
       "peerDependencies": {
         "@astrojs/compiler-rs": ">=0.5.3",
+        "@shadcn/lint": ">=0.2.5",
         "oxfmt": ">=0.78.0",
         "oxlint": ">=1.93.0",
         "oxlint-tsgolint": ">=7.0.2006",
       },
       "optionalPeers": [
         "@astrojs/compiler-rs",
+        "@shadcn/lint",
         "oxfmt",
         "oxlint",
         "oxlint-tsgolint",
@@ -560,7 +565,7 @@
 
     "@oxc-parser/binding-win32-x64-msvc": ["@oxc-parser/binding-win32-x64-msvc@0.148.0", "", { "os": "win32", "cpu": "x64" }, "sha512-Ye6vB7VQulghWYkYkECOBYFRVEizz4XyRTUAv+t8BuyurhKU7uD0P9eowL+mKG5Mf8MSYx+DI3Cm8SKZvYG7bQ=="],
 
-    "@oxc-project/types": ["@oxc-project/types@0.156.0", "", {}, "sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw=="],
+    "@oxc-project/types": ["@oxc-project/types@0.148.0", "", {}, "sha512-Nm4s/jB+4FpFsPhWGEC4h7rzksesmtnMXomo6rCMcg/b8zLQuOziRgkCS1fxDCXOlJB/6Q8oABOZ/OP6RIPj9A=="],
 
     "@oxfmt/binding-android-arm-eabi": ["@oxfmt/binding-android-arm-eabi@0.78.0", "", { "os": "android", "cpu": "arm" }, "sha512-1x9NPGQG5WMOOT8spRP4hPbeqwB/P9ayxFo4EUDSle6mLmtYRqE6suXgHr93/S2nnszy77LlIa8klkKdWtHbMw=="],
 
@@ -1668,13 +1673,13 @@
 
     "ora/string-width": ["string-width@7.2.0", "", { "dependencies": { "emoji-regex": "^10.3.0", "get-east-asian-width": "^1.0.0", "strip-ansi": "^7.1.0" } }, "sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ=="],
 
-    "oxc-parser/@oxc-project/types": ["@oxc-project/types@0.148.0", "", {}, "sha512-Nm4s/jB+4FpFsPhWGEC4h7rzksesmtnMXomo6rCMcg/b8zLQuOziRgkCS1fxDCXOlJB/6Q8oABOZ/OP6RIPj9A=="],
-
     "p-locate/p-limit": ["p-limit@2.3.0", "", { "dependencies": { "p-try": "^2.0.0" } }, "sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w=="],
 
     "prompts/kleur": ["kleur@3.0.3", "", {}, "sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w=="],
 
     "prompts/sisteransi": ["sisteransi@1.0.5", "", {}, "sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg=="],
+
+    "rolldown/@oxc-project/types": ["@oxc-project/types@0.156.0", "", {}, "sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw=="],
 
     "shadcn/cn": ["cn@0.2.6", "", { "bin": { "cn": "bin/cn.mjs" } }, "sha512-+i4L0zUGgRcEnhsxueVrP7iBGxBx5iD0WOTYg1MwFEu2ZyCmH5Ov2V1cul2Ht5UchRQQgftCf4be/RxspuW6QQ=="],
 

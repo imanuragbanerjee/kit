@@ -30,6 +30,7 @@
     "@anuragbanerjee/oxc-config": "workspace:*",
     "@anuragbanerjee/tsconfig": "workspace:*",
     "@astrojs/check": "catalog:",
+    "@shadcn/lint": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

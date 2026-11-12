@@ -45,11 +45,7 @@
       "types": "./src/oxlint-astro.d.ts",
       "default": "./src/oxlint-astro.js"
     },
-    "./package.json": "./package.json",
-    "./oxlint/shadcn": {
-      "types": "./src/oxlint-shadcn.d.ts",
-      "default": "./src/oxlint-shadcn.js"
-    }
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public",
@@ -59,11 +55,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@shadcn/lint": "^0.2.5",
     "ultracite": "^8.2.0"
   },
   "devDependencies": {
     "@anuragbanerjee/tsconfig": "workspace:*",
+    "@shadcn/lint": "catalog:",
     "@types/node": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
@@ -71,12 +67,16 @@
   },
   "peerDependencies": {
     "@astrojs/compiler-rs": ">=0.5.3",
+    "@shadcn/lint": ">=0.2.5",
     "oxfmt": ">=0.78.0",
     "oxlint": ">=1.93.0",
     "oxlint-tsgolint": ">=7.0.2006"
   },
   "peerDependenciesMeta": {
     "@astrojs/compiler-rs": {
+      "optional": true
+    },
+    "@shadcn/lint": {
       "optional": true
     },
     "oxfmt": {

@@ -25,13 +25,12 @@ The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` re
 
 ## oxlint
 
-| Import                                     | Contents                                                           |
-| ------------------------------------------ | ------------------------------------------------------------------ |
-| `@anuragbanerjee/oxc-config/oxlint`        | Ultracite `core` plus shared rule decisions                        |
-| `@anuragbanerjee/oxc-config/oxlint/react`  | `core` + `react` + `shadcn`                                        |
-| `@anuragbanerjee/oxc-config/oxlint/next`   | `core` + `react` + `shadcn` + `next`                               |
-| `@anuragbanerjee/oxc-config/oxlint/astro`  | `core` + `react` + `shadcn` + `astro`                              |
-| `@anuragbanerjee/oxc-config/oxlint/shadcn` | Only the [`@shadcn/lint`](https://github.com/shadcn-ui/lint) rules |
+| Import                                    | Contents                                    |
+| ----------------------------------------- | ------------------------------------------- |
+| `@anuragbanerjee/oxc-config/oxlint`       | Ultracite `core` plus shared rule decisions |
+| `@anuragbanerjee/oxc-config/oxlint/react` | `core` + `react` + `shadcn`                 |
+| `@anuragbanerjee/oxc-config/oxlint/next`  | `core` + `react` + `shadcn` + `next`        |
+| `@anuragbanerjee/oxc-config/oxlint/astro` | `core` + `react` + `shadcn` + `astro`       |
 
 ```ts
 // oxlint.config.ts
@@ -48,12 +47,12 @@ export default defineConfig({
 });
 ```
 
-The framework presets include [`@shadcn/lint`](https://github.com/shadcn-ui/lint) (Ultracite's `shadcn` preset, every rule at `error`, `allow: ["layout"]`). The package depends on the plugin and resolves it itself, so projects do not install it. Components and theme tokens are found through the project's `components.json`. Turn the restyle rules off for a directory that defines components:
+The framework presets include [`@shadcn/lint`](https://github.com/shadcn-ui/lint) (Ultracite's `shadcn` preset, every rule at `error`, `allow: ["layout"]`). Oxlint resolves the plugin relative to your config file, so install it in every project that has an `oxlint.config.ts`: `bun add -d @shadcn/lint`. Components and theme tokens are found through the project's `components.json`. Directories named `components/ui` are already exempt from the restyle rules; for another directory that defines components, turn them off:
 
 ```ts
 overrides: [
   {
-    files: ["packages/ui/src/components/**"],
+    files: ["src/ds/**"],
     rules: {
       "shadcn/no-arbitrary-values": "off",
       "shadcn/no-restyle": "off",

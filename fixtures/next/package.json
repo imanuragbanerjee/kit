@@ -25,6 +25,7 @@
   "devDependencies": {
     "@anuragbanerjee/oxc-config": "workspace:*",
     "@anuragbanerjee/tsconfig": "workspace:*",
+    "@shadcn/lint": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

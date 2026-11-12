@@ -1,7 +1,7 @@
 import core from "ultracite/oxlint/core";
 import react from "ultracite/oxlint/react";
+import shadcn from "ultracite/oxlint/shadcn";
 
-import shadcn from "./oxlint-shadcn.js";
 import { reactRules, rules } from "./oxlint.js";
 
 /** @type {import("oxlint").OxlintConfig} */
