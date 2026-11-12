@@ -13,9 +13,8 @@ export default function RootLayout({
   children: ReactNode;
 }): ReactElement {
   return (
-    <html lang="en" data-theme="brand">
-      {/* Base UI portals and iOS 26+ Safari backdrops need `position: relative`
-          on body and an isolated stacking context on the app root. */}
+    <html lang="en">
+      {/* Base UI: iOS 26+ Safari backdrops need a relative body and an isolated app root. */}
       <body className="relative">
         <div className="isolate min-h-dvh">{children}</div>
       </body>

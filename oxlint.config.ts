@@ -4,19 +4,6 @@ import { defineConfig } from "oxlint";
 
 export default defineConfig({
   extends: [react],
-  ignorePatterns: [
-    ...ignorePatterns,
-    "**/r",
-    // Written by `shadcn add` from the local registry; lint fixes would be
-    // replayed on the next install (see scripts/test-fixtures.ts).
-    "fixtures/*/src/components/ui/**",
-  ],
+  ignorePatterns: [...ignorePatterns, "**/r", "**/components/ui/**"],
   options: { typeAware: true },
-  overrides: [
-    {
-      // Scripts run steps in order on purpose.
-      files: ["scripts/**"],
-      rules: { "eslint/no-await-in-loop": "off" },
-    },
-  ],
 });

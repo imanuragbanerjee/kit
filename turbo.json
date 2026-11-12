@@ -5,13 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        ".output/**",
-        ".astro/**"
-      ]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", ".output/**"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck"]
@@ -21,6 +15,9 @@
       "persistent": true
     },
     "clean": {
+      "cache": false
+    },
+    "test:registry": {
       "cache": false
     }
   }

@@ -1,20 +1,20 @@
 # kit
 
-Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose (Next.js, Astro and TanStack Start are all covered by fixtures).
+Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose; a Next.js fixture covers it.
 
-| Path                 | Package                      | Published       | What                                                                 |
-| -------------------- | ---------------------------- | --------------- | -------------------------------------------------------------------- |
-| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next, astro, tanstack) |
-| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs, astro, tanstack-start)  |
-| `packages/theme`     | `@anuragbanerjee/theme`      | npm             | Tailwind v4 CSS: colour mapping, fonts, typography, themes           |
-| `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Source of the registry items (Button on Base UI)                     |
-| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js, Astro and TanStack Start apps that consume it       |
+| Path                 | Package                      | Published       | What                                                |
+| -------------------- | ---------------------------- | --------------- | --------------------------------------------------- |
+| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next) |
+| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs)        |
+| `packages/design`    | `@anuragbanerjee/design`     | never (private) | Tailwind v4 CSS: colour mapping, fonts, themes      |
+| `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)      |
+| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | A minimal Next.js app that consumes it              |
 
-Not published to npm yet. Third-party notices (shadcn/ui, MIT) are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Not published to npm yet.
 
 ## Setup
 
-Runtimes are pinned in `.tool-versions` (Node, Bun); `packageManager` pins Bun.
+The exact Node and Bun versions live only in `.tool-versions`; local tooling (mise, asdf) and every CI workflow read them from there. `package.json` carries `devEngines` ranges (`node >=26`, `bun ^1.4.4`), which Turborepo needs to detect the package manager but which are compatibility ranges, not pins.
 
 ```sh
 bun install
@@ -25,14 +25,14 @@ Other scripts: `format`, `lint`, `lint:fix`, `check`, `typecheck`, `build`, `reg
 
 ## Using the packages
 
-See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsconfig](tooling/tsconfig/README.md), [theme](packages/theme/README.md).
+See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsconfig](tooling/tsconfig/README.md), [design](packages/design/README.md).
 
 ## Using the registry
 
-`registry.json` at the repo root includes `packages/ui/registry.json` (components) and `packages/theme/registry.json` (themes). Items use the `base-vega` shadcn style on Base UI and compose through the `render` prop, never `asChild`.
+`registry.json` at the repo root includes `packages/ui/registry.json` (our components) and `packages/design/registry.json` (themes). The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's own registry in the consumer's style (`base-vega`).
 
-Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), which any static host can serve; then `shadcn add https://<host>/button.json`. Locally, `shadcn add ./r/button.json` works after a build.
+Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), which any static host can serve; then `shadcn add https://<host>/theme-personal.json`. Locally, `shadcn add ./r/theme-personal.json` works after a build.
 
-GitHub-direct (`shadcn add imanuragbanerjee/kit/button`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/button#<sha>`.
+GitHub-direct (`shadcn add imanuragbanerjee/kit/theme-personal`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme-personal#<sha>`.
 
-`bun run test:fixtures` builds the registry, serves `r/` from a throwaway server, installs the Button into each fixture and builds each one.
+Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.

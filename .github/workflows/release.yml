@@ -1,34 +1,77 @@
 name: Release
 
-# Manual until npm trusted publishing is configured and the GitHub account is
-# renamed (published packages record the repository URL permanently). Restore
-# the `push: branches: [main]` trigger when ready.
+# Manual until npm trusted publishing is configured; then trigger on push to main.
 on:
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write # npm Trusted Publishing (OIDC)
+permissions: {}
 
 jobs:
-  release:
+  check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      mode: ${{ steps.mode.outputs.mode }}
+      pack-dir-artifact-id: ${{ steps.pack.outputs.pack-dir-artifact-id }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - id: mode
+        uses: changesets/action/select-mode@v2
+      - if: steps.mode.outputs.mode == 'publish'
+        run: bun run verify
+      - id: pack
+        if: steps.mode.outputs.mode == 'publish'
+        uses: changesets/action/pack@v2
+        with:
+          publish-plan-artifact-id: ${{ steps.mode.outputs.publish-plan-artifact-id }}
+
+  version:
+    needs: check
+    if: needs.check.outputs.mode == 'version'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
-      - uses: actions/setup-node@v6
+      - run: bun install --frozen-lockfile --ignore-scripts --filter kit
+      - uses: changesets/action/version@v2
+        with:
+          commit-message: "chore(release): version packages"
+          pr-title: "chore(release): version packages"
+          script: bun run version-packages
+
+  publish:
+    needs: check
+    if: needs.check.outputs.mode == 'publish'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # tags, GitHub releases
+      id-token: write # npm trusted publishing + provenance
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
           registry-url: https://registry.npmjs.org
-      - run: bun install --frozen-lockfile
-      - uses: changesets/action@v1
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: bun run version-packages
-          publish: bun run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          bun-version-file: .tool-versions
+      - run: bun install --frozen-lockfile --ignore-scripts --filter kit
+      - uses: changesets/action/publish@v2
+        with:
+          pack-dir-artifact-id: ${{ needs.check.outputs.pack-dir-artifact-id }}

@@ -1,9 +1,9 @@
 # @anuragbanerjee/oxc-config
 
-Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react`, `next`, `astro` and `tanstack` presets.
+Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react` and `next` presets.
 
 ```sh
-bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint
+bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint @shadcn/lint
 ```
 
 ## oxfmt
@@ -21,17 +21,15 @@ export default defineConfig({
 });
 ```
 
-The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` replaces the whole nested object. For `.astro` files install `@astrojs/compiler-rs`; the preset sets `astro: { compressHTML: "html" }` because the default mode inserts whitespace into links.
+The spread is shallow: overriding `sortImports` or `sortTailwindcss` replaces the whole nested object.
 
 ## oxlint
 
-| Import                                       | Contents                                    |
-| -------------------------------------------- | ------------------------------------------- |
-| `@anuragbanerjee/oxc-config/oxlint`          | Ultracite `core` plus shared rule decisions |
-| `@anuragbanerjee/oxc-config/oxlint/react`    | `core` + `react`                            |
-| `@anuragbanerjee/oxc-config/oxlint/next`     | `core` + `react` + `next`                   |
-| `@anuragbanerjee/oxc-config/oxlint/astro`    | `core` + `react` + `astro`                  |
-| `@anuragbanerjee/oxc-config/oxlint/tanstack` | `core` + `react` + `tanstack`               |
+| Import                                    | Contents                                    |
+| ----------------------------------------- | ------------------------------------------- |
+| `@anuragbanerjee/oxc-config/oxlint`       | Ultracite `core` plus shared rule decisions |
+| `@anuragbanerjee/oxc-config/oxlint/react` | `core` + `react` + `shadcn`                 |
+| `@anuragbanerjee/oxc-config/oxlint/next`  | `core` + `react` + `shadcn` + `next`        |
 
 ```ts
 // oxlint.config.ts
@@ -46,6 +44,21 @@ export default defineConfig({
   // Presets cannot carry root options.
   options: { typeAware: true },
 });
+```
+
+The framework presets include [`@shadcn/lint`](https://github.com/shadcn-ui/lint) (Ultracite's `shadcn` preset, every rule at `error`, `allow: ["layout"]`). Oxlint resolves the plugin relative to your config file, so install it in every project that has an `oxlint.config.ts`: `bun add -d @shadcn/lint`. Components and theme tokens are found through the project's `components.json`. Directories named `components/ui` are already exempt from the restyle rules; for another directory that defines components, turn them off:
+
+```ts
+overrides: [
+  {
+    files: ["src/ds/**"],
+    rules: {
+      "shadcn/no-arbitrary-values": "off",
+      "shadcn/no-restyle": "off",
+      "shadcn/require-static-classes": "off",
+    },
+  },
+],
 ```
 
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings.

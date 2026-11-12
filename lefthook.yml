@@ -5,7 +5,7 @@ pre-commit:
   parallel: true
   jobs:
     - name: oxlint
-      glob: "*.{js,jsx,ts,tsx,astro}"
+      glob: "*.{js,jsx,ts,tsx}"
       # Report only: autofix can rewrite staged code in ways that still
       # typecheck but change behaviour. Fix on demand with `bun run lint:fix`.
       run: bun oxlint --no-error-on-unmatched-pattern {staged_files}

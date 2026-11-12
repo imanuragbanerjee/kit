@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Base",
   "compilerOptions": {
-    "target": "ES2023",
-    "lib": ["ES2023"],
+    "target": "ES2025",
+    "lib": ["ES2025"],
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "moduleDetection": "force",
@@ -19,7 +19,16 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "erasableSyntaxOnly": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true
   },
-  "exclude": ["node_modules", "dist", "build", ".next", ".astro", ".output"]
+  "exclude": [
+    "${configDir}/node_modules",
+    "${configDir}/dist",
+    "${configDir}/build",
+    "${configDir}/.next",
+    "${configDir}/.output"
+  ]
 }

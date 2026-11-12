@@ -1,0 +1,28 @@
+{
+  "name": "@anuragbanerjee/design",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Private source of our theme registry items, plus the Tailwind colour mapping and fonts the fixture and packages/ui use.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./base": {
+      "style": "./base.css",
+      "default": "./base.css"
+    },
+    "./fonts": {
+      "style": "./fonts.css",
+      "default": "./fonts.css"
+    },
+    "./themes/*": {
+      "style": "./themes/*.css",
+      "default": "./themes/*.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "catalog:",
+    "@fontsource-variable/geist-mono": "catalog:",
+    "tailwindcss": "catalog:"
+  }
+}

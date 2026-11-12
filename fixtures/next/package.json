@@ -6,31 +6,32 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "oxlint .",
     "start": "next start",
+    "test:registry": "shadcn add button --yes --overwrite && bun run build",
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@anuragbanerjee/theme": "workspace:*",
-    "@base-ui/react": "^1.9.0",
-    "@fontsource-variable/geist": "^5.3.0",
-    "@fontsource-variable/geist-mono": "^5.3.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "next": "^16.4.6",
+    "@anuragbanerjee/design": "workspace:*",
+    "@base-ui/react": "catalog:",
+    "@fontsource-variable/geist": "catalog:",
+    "@fontsource-variable/geist-mono": "catalog:",
+    "class-variance-authority": "catalog:",
+    "cn": "catalog:",
+    "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "tailwind-merge": "^3.7.0"
+    "tw-animate-css": "catalog:"
   },
   "devDependencies": {
     "@anuragbanerjee/oxc-config": "workspace:*",
     "@anuragbanerjee/tsconfig": "workspace:*",
-    "@tailwindcss/postcss": "^4.3.5",
+    "@shadcn/lint": "catalog:",
+    "@tailwindcss/postcss": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "oxlint": "^1.93.0",
-    "shadcn": "^4.23.0",
+    "oxlint": "catalog:",
+    "shadcn": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }

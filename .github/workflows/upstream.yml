@@ -1,0 +1,28 @@
+name: Upstream
+
+# Kept out of CI so a shadcn/ui release cannot block unrelated pull requests.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  primitives:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: bun run ui:sync
+      - run: git diff --exit-code -- packages/ui/src/components/ui
+
+  fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: bun run test:fixtures

@@ -1,59 +1,46 @@
 # kit: agent reference
 
-Personal monorepo (Bun workspaces + Turborepo + Changesets). Read [README.md](README.md) first. Everything must stay framework-neutral: no Next-only or Astro-only code in the packages.
+Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](README.md). Keep everything framework-neutral: no Next-only code in the packages.
 
 ## Layout
 
-- `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,tanstack}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules.
-- `tooling/tsconfig`: `@anuragbanerjee/tsconfig`. JSON bases, no `include`/`paths`/`types` (consumers set them).
-- `packages/theme`: `@anuragbanerjee/theme`. CSS only. Every export lists `style` and `default` conditions.
-- `packages/ui`: `@anuragbanerjee/ui`, **private**. Registry item sources in `src/components`, `registry.json` with the items. `components.json` uses style `base-vega`.
-- `fixtures/*`: private apps. `src/components/ui/button.tsx` in each is written by `shadcn add`; do not hand-edit it.
-- Root `registry.json`: only `name`, `homepage` and `include`. Add items to the included files, not here.
+- `tooling/oxc-config`: oxfmt preset (spread it, oxfmt has no `extends`) and oxlint presets `./oxlint`, `./oxlint/{react,next}`. Raw JS plus hand-written `.d.ts`, no build. The framework presets include Ultracite's `shadcn` preset, so every project that lints with them needs `@shadcn/lint` installed.
+- `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
+- `packages/design` (private): CSS only; source of the theme registry items, plus the colour mapping and fonts that the fixture and `packages/ui` import.
+- `packages/ui` (private): our own components and `registry.json`, plus the vendored shadcn primitives in `src/components/ui`.
+- `fixtures/*` (private): a Next.js app; their `src/components/ui/button.tsx` comes from `shadcn add`.
+- Root `registry.json` only has `name`, `homepage` and `include`.
 
-Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbanerjee/oxc-config`). Files and folders are kebab-case.
+Folder names match the package name suffix. Files and folders are kebab-case.
 
 ## Conventions
 
-- Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files.
-- `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
-- `astro check` needs TypeScript 6, so TypeScript is pinned to `^6` in the catalog.
-- `prepare` is `lefthook install || true` (it fails without a `.git`).
-- oxlint ignores `ignorePatterns` from extended configs, so presets export them. `options.typeAware` only works in the root config; nested `oxlint.config.ts` files (fixtures) pick up their own preset.
-- Components compose with Base UI's `render` prop (`useRender` + `mergeProps` from `@base-ui/react`), never `asChild`. No coss ui or other third-party registry dependency.
-- Commit style: `chore:` / `feat:` / `fix:`, small and logical.
+- oxfmt and oxlint (type-aware). Run `bun run check` before committing.
+- Exact Node and Bun versions live only in `.tool-versions`; `package.json` has `devEngines` ranges.
+- Bun uses the isolated linker: a package can only import what it declares.
+- Every external version lives once in `workspaces.catalog` (use `catalog:`). Peer ranges and `dependencies` of published packages stay explicit.
+- `options.typeAware` only works in the root oxlint config; nested configs (fixtures) use their own preset. Presets cannot carry `ignorePatterns`, so they are exported.
+- Compose with Base UI's `render` prop (`nativeButton={false}` for non-buttons), never `asChild`. No coss ui or other third-party registry dependency.
+- Reference public projects (shadcn-ui/ui, shadcn-ui/lint, Ultracite), not company-internal repos.
+- Commits: `chore:` / `feat:` / `fix:`, small and logical.
 
-## Registry items
+## shadcn primitives and registry items
 
-Registry sources are formatted **without semicolons** (`oxfmt.config.ts` override for `packages/ui/src/**`). With `rsc: false` the shadcn CLI strips `"use client"` only when the directive has no trailing semicolon; with one, it survives into Astro and TanStack consumers.
+- Never hand-edit `components/ui`. It is upstream `base-vega`, vendored for development only, excluded from oxfmt and oxlint. `bun run ui:sync` re-fetches it (add the name to that script for a new primitive); `upstream.yml` runs weekly and fails on a diff.
+- Registry items do not republish primitives. They declare `registryDependencies: ["button"]` so consumers get upstream from shadcn.
+- Our components live in `packages/ui/src` outside `components/ui`. Use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
 
-Add an item:
-
-1. Create `packages/ui/src/components/<name>.tsx`. Import the class helper as `import { cn } from "@/registry/kit/lib/utils"`; the CLI rewrites it to the consumer's `utils` alias. Keep `"use client"` on the first line when the component uses hooks.
-2. Add the item to `packages/ui/registry.json`: `name`, `type`, `title`, `description`, `dependencies` (npm), `files: [{ "path": "src/components/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]`. The `@ui/` target is required: without it a path containing the `ui` folder is nested wrongly. Item names are unique across all included files.
-3. `bun run registry:build && bun run registry:validate`.
-4. Extend `scripts/test-fixtures.ts` to install the new item, run `bun run test:fixtures`, commit the changed fixture files.
-5. Dependencies on other items in this registry must use the full GitHub address (`imanuragbanerjee/kit/<item>`), which does not resolve for hosted registries; prefer self-contained items.
-
-`r/` is generated by `shadcn build` and is git-ignored. GitHub-direct installs read the source files, and a hosting app will rebuild `r/`.
+Add an item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
 
 ## Themes
 
-1. Add `packages/theme/themes/<name>.css`: light variables on `[data-theme="<name>"]`, dark on `.dark [data-theme="<name>"], [data-theme="<name>"].dark`. `default.css` is the only theme on `:root`/`.dark`.
-2. Add a `theme-<name>` item (`registry:theme`, `cssVars.light` and `cssVars.dark` mirroring the CSS) to `packages/theme/registry.json`.
-3. Add a row to `packages/theme/README.md`. The `themes/*` export is a wildcard, so `package.json` needs no change.
-4. Add a changeset (`minor`).
+Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, and a README row.
 
-## Changesets and releases
+## Releases
 
-Published packages: `tooling/oxc-config`, `tooling/tsconfig`, `packages/theme` (`access: public`). `packages/ui` and the fixtures are ignored in `.changeset/config.json`.
-
-1. `bun run changeset`, pick the packages and bump type, describe the change.
-2. Commit the generated `.changeset/*.md` with the change.
-3. Versioning is `bun run version-packages`; publishing is `bun run release` (`changeset publish`) and runs from CI (`.github/workflows/release.yml`, manual-only for now) once npm trusted publishing is configured. Never publish by hand and never from an agent session.
-4. Published manifests must not use `workspace:` or `catalog:` in `dependencies` or `peerDependencies` (`npm publish` does not rewrite them). They are fine in `devDependencies`.
+Published to npm: `tooling/oxc-config` and `tooling/tsconfig`. Themes are delivered through the registry only. Add a changeset with `bun run changeset`. `release.yml` (split `check`, `version`, `publish` jobs, manual for now) is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm because trusted publishing and provenance are npm features. Never publish by hand or from an agent session.
 
 ## Not done yet
 
-- npm publishing: the packages do not exist on npm, and trusted publishing can only be configured once they do (first publish needs a token). Published versions record the repository URL permanently, so confirm it is `imanuragbanerjee/kit` first.
-- Once the repository is public, never rewrite history on `main`: old commits stay reachable on GitHub through pull request references. Re-run the safety scan (no secrets, emails or phone numbers in the tree or history) before any change of visibility.
+- npm publishing: trusted publishing can only be configured after the first publish, and published versions record the repository URL permanently.
+- Once the repository is public, never rewrite history on `main`. Re-run the safety scan (no secrets, emails or phone numbers in the tree or history) before any change of visibility.
