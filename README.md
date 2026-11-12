@@ -29,22 +29,22 @@ See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsc
 
 ## Using the registry
 
-`registry.json` at the repo root includes `packages/ui/registry.json` (our components), `packages/design/registry.json` (the `personal` base and two themes) and `registry/registry.json` (project and GitHub files).
+`registry.json` at the repo root includes `packages/ui/registry.json` (our components), `packages/design/registry.json` (the `preset` and two themes) and `registry/registry.json` (project and GitHub files).
 
 | Item                                                                                     | Type  | What it does                                                                                                  |
 | ---------------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------- |
-| `personal`                                                                               | base  | A whole project setup: base-vega on Base UI, lucide, Geist fonts, the personal theme. Use with `shadcn init`. |
-| `theme`, `theme-personal`                                                                | theme | Colour variables for `:root` and `.dark`.                                                                     |
+| `preset`                                                                                 | base  | A whole project setup: base-vega on Base UI, lucide, Geist fonts, the personal theme. Use with `shadcn init`. |
+| `theme`, `personal`                                                                      | theme | Colour variables for `:root` and `.dark`.                                                                     |
 | `project-files`                                                                          | files | `.editorconfig`, `lefthook.yml`, VS Code settings, oxfmt and oxlint configs, `AGENTS.md`.                     |
 | `github-ci`, `github-release`, `github-labeler`, `github-dependabot`, `github-templates` | files | Workflows, labeler, Dependabot and PR and issue templates.                                                    |
 
 ```sh
-shadcn init imanuragbanerjee/kit/personal
+shadcn init imanuragbanerjee/kit/preset
 shadcn add imanuragbanerjee/kit/github-ci
 ```
 
 The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our own components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's registry.
 
-`bun run registry:build` writes `r/*.json` (generated, git-ignored). Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/personal.json` and `shadcn add ./r/<item>.json` work locally after a build.
+`bun run registry:build` writes `r/*.json` (generated, git-ignored). Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/preset.json` and `shadcn add ./r/<item>.json` work locally after a build.
 
 Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.
