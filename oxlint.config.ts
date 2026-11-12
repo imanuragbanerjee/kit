@@ -2,11 +2,20 @@ import { ignorePatterns } from "@anuragbanerjee/oxc-config/oxlint";
 import react from "@anuragbanerjee/oxc-config/oxlint/react";
 import { defineConfig } from "oxlint";
 
+import primitives from "./packages/ui/primitives.json" with { type: "json" };
+
+// shadcn/ui primitives are synced from upstream; lint fixes would be replayed
+// (and hand edits are forbidden) on the next `bun run ui:sync`.
+const synced = primitives.primitives.map(
+  (name) => `packages/ui/src/components/ui/${name}.tsx`,
+);
+
 export default defineConfig({
   extends: [react],
   ignorePatterns: [
     ...ignorePatterns,
     "**/r",
+    ...synced,
     // Written by `shadcn add` from the local registry; lint fixes would be
     // replayed on the next install (see scripts/test-fixtures.ts).
     "fixtures/*/src/components/ui/**",

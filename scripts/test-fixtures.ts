@@ -5,8 +5,7 @@
  *   1. `shadcn build` writes r/*.json from registry.json.
  *   2. A throwaway static server serves r/ (what a hosted registry would do).
  *   3. `shadcn add <url>/button.json` writes the item into every fixture.
- *   4. The fixture builds, and the script checks whether `"use client"`
- *      survived (it must be kept for `rsc: true` and stripped for `rsc: false`).
+ *   4. The fixture builds.
  *
  * The installed files are committed, so `git diff` after a run shows drift
  * between the registry source and what the fixtures contain.
@@ -18,11 +17,7 @@ import { createServer } from "node:http";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const fixtures = [
-  { name: "next", rsc: true },
-  { name: "astro", rsc: false },
-  { name: "tanstack-start", rsc: false },
-];
+const fixtures = ["next", "astro", "tanstack-start"];
 
 // Must be async: the static server lives in this process, so a blocking
 // spawn would starve it and `shadcn add` would hang.
@@ -56,10 +51,9 @@ const address = server.address();
 const port = typeof address === "object" && address ? address.port : 0;
 const registry = `http://127.0.0.1:${port}`;
 
-const failures: string[] = [];
 try {
-  for (const fixture of fixtures) {
-    const cwd = path.join(root, "fixtures", fixture.name);
+  for (const name of fixtures) {
+    const cwd = path.join(root, "fixtures", name);
     const target = path.join(cwd, "src/components/ui/button.tsx");
     rmSync(target, { force: true });
     await run(
@@ -67,13 +61,17 @@ try {
       ["shadcn", "add", `${registry}/button.json`, "--yes", "--overwrite"],
       cwd,
     );
-    const hasDirective = /^["']use client["']/u.test(
-      readFileSync(target, "utf-8"),
-    );
-    const note = `${fixture.name} (rsc: ${fixture.rsc}): "use client" ${hasDirective ? "kept" : "stripped"}`;
-    console.log(note);
-    if (hasDirective !== fixture.rsc) {
-      failures.push(note);
+    // The registry must hand out the synced primitive byte for byte.
+    if (
+      readFileSync(target, "utf-8") !==
+      readFileSync(
+        path.join(root, "packages/ui/src/components/ui/button.tsx"),
+        "utf-8",
+      )
+    ) {
+      throw new Error(
+        `${name}: installed button differs from the registry source`,
+      );
     }
     await run("bun", ["run", "build"], cwd);
   }
@@ -81,10 +79,6 @@ try {
   server.close();
 }
 
-if (failures.length > 0) {
-  console.error(`Unexpected "use client" handling:\n${failures.join("\n")}`);
-  process.exit(1);
-}
 console.log(
   "All fixtures installed the button from the local registry and built.",
 );

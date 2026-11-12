@@ -5,16 +5,11 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "A button built on Base UI's useRender, with cva variants. Compose with the render prop.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
+      "description": "The shadcn/ui Button on Base UI (base-vega), synced from upstream. Compose with the render prop.",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
       "files": [
         {
-          "path": "src/components/button.tsx",
+          "path": "src/components/ui/button.tsx",
           "type": "registry:ui",
           "target": "@ui/button.tsx"
         }

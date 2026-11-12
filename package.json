@@ -35,7 +35,7 @@
       "@vitejs/plugin-react": "^6.3.0",
       "astro": "^7.4.11",
       "class-variance-authority": "^0.7.1",
-      "clsx": "^2.1.1",
+      "cn": "^0.5.2",
       "lefthook": "^2.2.2",
       "next": "^16.4.6",
       "oxfmt": "^0.78.0",
@@ -44,7 +44,6 @@
       "react": "^19.3.1",
       "react-dom": "^19.3.1",
       "shadcn": "^4.23.0",
-      "tailwind-merge": "^3.7.0",
       "tailwindcss": "^4.3.5",
       "taze": "^21.3.0",
       "turbo": "^2.11.11",
@@ -73,7 +72,9 @@
     "test:fixtures": "bun scripts/test-fixtures.ts",
     "typecheck": "turbo run typecheck && tsc --noEmit",
     "verify": "bun run format:check && bun run lint && bun run typecheck && bun run build",
-    "version-packages": "changeset version"
+    "version-packages": "changeset version",
+    "ui:sync": "bun scripts/sync-ui.ts",
+    "ui:check": "bun scripts/sync-ui.ts --check"
   },
   "devDependencies": {
     "@anuragbanerjee/oxc-config": "workspace:*",

@@ -13,9 +13,8 @@
     "@anuragbanerjee/theme": "workspace:*",
     "@base-ui/react": "catalog:",
     "class-variance-authority": "catalog:",
-    "clsx": "catalog:",
+    "cn": "catalog:",
     "react": "catalog:",
-    "tailwind-merge": "catalog:",
     "tw-animate-css": "catalog:"
   },
   "devDependencies": {

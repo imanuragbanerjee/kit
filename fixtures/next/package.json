@@ -16,11 +16,10 @@
     "@fontsource-variable/geist": "catalog:",
     "@fontsource-variable/geist-mono": "catalog:",
     "class-variance-authority": "catalog:",
-    "clsx": "catalog:",
+    "cn": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "tailwind-merge": "catalog:"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@anuragbanerjee/oxc-config": "workspace:*",

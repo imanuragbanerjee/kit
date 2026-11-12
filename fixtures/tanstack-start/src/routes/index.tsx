@@ -15,7 +15,9 @@ function Home(): ReactElement {
         <Button variant="destructive">Destructive</Button>
         <Button variant="link">Link</Button>
         <Button size="sm">Small</Button>
-        <Button render={<a href="https://example.com" />}>As a link</Button>
+        <Button nativeButton={false} render={<a href="https://example.com" />}>
+          As a link
+        </Button>
       </div>
     </main>
   );
