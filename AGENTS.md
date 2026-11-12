@@ -6,8 +6,8 @@ Bun workspaces, Turborepo, Changesets. [README.md](README.md) has the layout, se
 
 - `tooling/oxc-config`: raw JS plus hand-written `.d.ts`, no build. oxfmt has no `extends`, so consumers spread the preset. The framework presets include Ultracite's `shadcn` preset, so projects that lint with them install `@shadcn/lint`.
 - `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
-- `registry/files/**` are templates copied into other projects. Name config templates `*-config.ts` so oxlint does not treat them as nested configs.
-- Root `registry.json` only has `name`, `homepage` and `include`.
+- Root `registry.json` has `include` plus `items` for the GitHub and project-file items. Those items point at this repo's own files (`.github/**`, `.editorconfig`, `lefthook.yml`, `.vscode`), so edit those files directly: they are what we run and what we publish.
+- `templates/` holds the generic starter files that are not ours (`AGENTS.md`, oxfmt/oxlint stubs). Name config templates `*-config.ts` so oxlint does not treat them as nested configs.
 - Folder names match the package name suffix; files and folders are kebab-case.
 
 ## Conventions
@@ -28,7 +28,7 @@ For registry authoring and CLI usage follow the `shadcn` skill (`.agents/skills/
 - Never hand-edit `components/ui`: it is upstream `base-vega`, vendored for development only and excluded from oxfmt and oxlint. `bun run ui:sync` re-fetches it (add the name to that script for a new primitive); `upstream.yml` runs weekly and fails on a diff.
 - Registry items do not republish primitives; they declare `registryDependencies: ["button"]`.
 - Our components live in `packages/ui/src` outside `components/ui` and use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
-- Component items go in `packages/ui/registry.json` with `target: "@ui/<name>.tsx"` (required, or the CLI nests the file wrongly); plain-file items go in `registry/registry.json`. Then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored; `pages.yml` publishes it.
+- Component items go in `packages/ui/registry.json` with `target: "@ui/<name>.tsx"` (required, or the CLI nests the file wrongly); plain-file items go in the root `registry.json`. Then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored; `pages.yml` publishes it.
 - Themes: add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports one theme) and a matching item in `packages/design/registry.json` (`theme` for the default `base`, otherwise the name).
 
 ## Agent skills

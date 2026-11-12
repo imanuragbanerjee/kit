@@ -5,10 +5,13 @@ on:
     branches: [main]
     paths:
       - registry.json
-      - registry/**
+      - templates/**
+      - .github/**
+      - .editorconfig
+      - lefthook.yml
+      - .vscode/**
       - packages/design/**
       - packages/ui/registry.json
-      - .github/workflows/pages.yml
   workflow_dispatch:
 
 concurrency:

@@ -2,9 +2,148 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "anuragbanerjee",
   "homepage": "https://github.com/imanuragbanerjee/kit",
-  "include": [
-    "packages/ui/registry.json",
-    "packages/design/registry.json",
-    "registry/registry.json"
+  "include": ["packages/ui/registry.json", "packages/design/registry.json"],
+  "items": [
+    {
+      "name": "project-files",
+      "type": "registry:item",
+      "title": "Project files",
+      "description": "Editor, git hook and lint setup: .editorconfig, lefthook.yml, VS Code settings, oxfmt and oxlint configs and an AGENTS.md starter.",
+      "devDependencies": [
+        "@anuragbanerjee/oxc-config",
+        "@shadcn/lint",
+        "lefthook",
+        "oxfmt",
+        "oxlint",
+        "oxlint-tsgolint"
+      ],
+      "files": [
+        {
+          "path": ".editorconfig",
+          "type": "registry:file",
+          "target": "~/.editorconfig"
+        },
+        {
+          "path": "lefthook.yml",
+          "type": "registry:file",
+          "target": "~/lefthook.yml"
+        },
+        {
+          "path": ".vscode/settings.json",
+          "type": "registry:file",
+          "target": "~/.vscode/settings.json"
+        },
+        {
+          "path": ".vscode/extensions.json",
+          "type": "registry:file",
+          "target": "~/.vscode/extensions.json"
+        },
+        {
+          "path": "templates/oxfmt-config.ts",
+          "type": "registry:file",
+          "target": "~/oxfmt.config.ts"
+        },
+        {
+          "path": "templates/oxlint-config.ts",
+          "type": "registry:file",
+          "target": "~/oxlint.config.ts"
+        },
+        {
+          "path": "templates/AGENTS.md",
+          "type": "registry:file",
+          "target": "~/AGENTS.md"
+        }
+      ],
+      "docs": "Add `\"prepare\": \"lefthook install || true\"` to package.json scripts, and edit oxlint.config.ts if you are not on Next.js."
+    },
+    {
+      "name": "github-ci",
+      "type": "registry:item",
+      "title": "GitHub CI (Bun + Turborepo)",
+      "description": "Parallel format, lint, typecheck and build jobs that share a setup action (Node and Bun from .tool-versions, frozen install).",
+      "files": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "type": "registry:file",
+          "target": "~/.github/workflows/ci.yml"
+        },
+        {
+          "path": ".github/actions/setup/action.yml",
+          "type": "registry:file",
+          "target": "~/.github/actions/setup/action.yml"
+        }
+      ],
+      "docs": "Needs a .tool-versions file with nodejs and bun, and package scripts format:check, lint, typecheck and build."
+    },
+    {
+      "name": "github-release",
+      "type": "registry:item",
+      "title": "GitHub release (Changesets)",
+      "description": "Changesets release workflow with separate check, version and publish jobs and npm trusted publishing. Manual until you enable the push trigger.",
+      "devDependencies": ["@changesets/changelog-github", "@changesets/cli"],
+      "registryDependencies": ["imanuragbanerjee/kit/github-ci"],
+      "files": [
+        {
+          "path": ".github/workflows/release.yml",
+          "type": "registry:file",
+          "target": "~/.github/workflows/release.yml"
+        }
+      ],
+      "docs": "Needs .changeset/config.json, package scripts version-packages (changeset version) and release (changeset publish), the repo setting that lets Actions create pull requests, and a trusted publisher on npm for each package."
+    },
+    {
+      "name": "github-labeler",
+      "type": "registry:item",
+      "title": "GitHub PR labeler",
+      "description": "Labels pull requests from the paths they change (docs, ci, dependencies).",
+      "files": [
+        {
+          "path": ".github/workflows/labeler.yml",
+          "type": "registry:file",
+          "target": "~/.github/workflows/labeler.yml"
+        },
+        {
+          "path": ".github/labeler.yml",
+          "type": "registry:file",
+          "target": "~/.github/labeler.yml"
+        }
+      ]
+    },
+    {
+      "name": "github-dependabot",
+      "type": "registry:item",
+      "title": "Dependabot",
+      "description": "Weekly grouped updates for Bun dependencies and GitHub Actions.",
+      "files": [
+        {
+          "path": ".github/dependabot.yml",
+          "type": "registry:file",
+          "target": "~/.github/dependabot.yml"
+        }
+      ]
+    },
+    {
+      "name": "github-templates",
+      "type": "registry:item",
+      "title": "PR and issue templates",
+      "description": "A short pull request template and two short issue forms (bug, idea).",
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "type": "registry:file",
+          "target": "~/.github/pull_request_template.md"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug-report.yml",
+          "type": "registry:file",
+          "target": "~/.github/ISSUE_TEMPLATE/bug-report.yml"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/feature-request.yml",
+          "type": "registry:file",
+          "target": "~/.github/ISSUE_TEMPLATE/feature-request.yml"
+        }
+      ]
+    }
   ]
 }
