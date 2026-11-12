@@ -1,37 +1,109 @@
 name: Release
 
+# Changesets flow, modelled on shadcn-ui/lint: a push to main with pending
+# changesets opens or updates a "Version Packages" PR; merging it publishes to
+# npm with provenance through OIDC trusted publishing (no npm token anywhere).
+#
+# The work is split so the job that can publish never shares a runner with the
+# project's dependencies:
+# - `check` (read-only) installs everything, picks the mode and, when
+#   publishing, runs the gates and packs the tarballs into an artifact.
+# - `version` opens the version PR. It can push a branch but not publish.
+# - `publish` holds id-token: write. It installs only the root tooling with
+#   --ignore-scripts and publishes the tarballs `check` packed.
+#
 # Manual until npm trusted publishing is configured (published packages record
 # the repository URL permanently, so confirm it first). Restore the
-# `push: branches: [main]` trigger when ready.
+# `push: branches: [main]` trigger when ready. Every action is pinned to a
+# commit SHA; Dependabot keeps the pins current.
 on:
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write # npm Trusted Publishing (OIDC) and provenance
+permissions: {}
 
 jobs:
-  release:
+  check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      mode: ${{ steps.mode.outputs.mode }}
+      pack-dir-artifact-id: ${{ steps.pack.outputs.pack-dir-artifact-id }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .tool-versions
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: .tool-versions
+      # No dependency cache on purpose: what this job packs is published with
+      # provenance, so install from the registry, verified by the lockfile.
+      - run: bun install --frozen-lockfile
+      # "version" (changesets pending), "publish" (an unpublished version) or
+      # "none"
+      - id: mode
+        uses: changesets/action/select-mode@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+      - if: steps.mode.outputs.mode == 'publish'
+        run: bun run verify
+      - if: steps.mode.outputs.mode == 'publish'
+        run: bun run test:fixtures
+      - id: pack
+        if: steps.mode.outputs.mode == 'publish'
+        uses: changesets/action/pack@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          publish-plan-artifact-id: ${{ steps.mode.outputs.publish-plan-artifact-id }}
 
-      - uses: actions/setup-node@v7
+  version:
+    needs: check
+    if: needs.check.outputs.mode == 'version'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # version PR branch
+      pull-requests: write # version PR
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .tool-versions
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: .tool-versions
+      # Root tooling only: changesets and its changelog plugin.
+      - run: bun install --frozen-lockfile --ignore-scripts --filter kit
+      - uses: changesets/action/version@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          commit-message: "chore(release): version packages"
+          pr-title: "chore(release): version packages"
+          script: bun run version-packages
+
+  publish:
+    needs: check
+    if: needs.check.outputs.mode == 'publish'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # tags, GitHub releases
+      id-token: write # npm trusted publishing + provenance
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .tool-versions
           registry-url: https://registry.npmjs.org
-
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version-file: .tool-versions
-
-      - run: bun install --frozen-lockfile
-
-      - uses: changesets/action@v2.1.2
+      # Trusted publishing needs npm >= 11.5.1.
+      - run: npm install -g npm@^11.5.1
+      # Root tooling only, no lifecycle scripts: the changesets CLI is the only
+      # installed code this job runs.
+      - run: bun install --frozen-lockfile --ignore-scripts --filter kit
+      - uses: changesets/action/publish@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
-          version-script: bun run version-packages
-          publish-script: bun run release
+          pack-dir-artifact-id: ${{ needs.check.outputs.pack-dir-artifact-id }}

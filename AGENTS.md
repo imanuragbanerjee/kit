@@ -4,7 +4,7 @@ Personal monorepo (Bun workspaces + Turborepo + Changesets). Read [README.md](RE
 
 ## Layout
 
-- `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,tanstack}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules.
+- `tooling/oxc-config`: `@anuragbanerjee/oxc-config`. Raw JS in `src/` (no build) with hand-written `.d.ts`; `exports` map: `./oxfmt`, `./oxlint`, `./oxlint/{react,next,astro,tanstack,shadcn}`. oxfmt has no `extends`, so consumers spread the object. Ultracite supplies the lint rules; every framework preset also includes the `@shadcn/lint` design-system rules (Ultracite's `shadcn` preset, with the plugin resolved from this package via `import.meta.resolve` so consumers install nothing extra). Components and the theme are discovered from each project's `components.json`; a UI source directory needs an override that turns off `shadcn/no-arbitrary-values`, `shadcn/no-restyle` and `shadcn/require-static-classes` (see the root `oxlint.config.ts`).
 - `tooling/tsconfig`: `@anuragbanerjee/tsconfig`. JSON bases, no `include`/`paths`/`types` (consumers set them).
 - `packages/theme`: `@anuragbanerjee/theme`. CSS only. Every export lists `style` and `default` conditions.
 - `packages/ui`: `@anuragbanerjee/ui`, **private**. Registry item sources in `src/components`, `registry.json` with the items. `components.json` uses style `base-vega`.
@@ -23,6 +23,7 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 - Every external version lives once in the root `workspaces.catalog`; package manifests use `catalog:`. Exceptions: `peerDependencies` (explicit ranges) and `dependencies` of published packages (explicit, see Changesets below). `bun run taze` reports updates, `bun run taze:fix` writes them; TypeScript stays on 6 until `@astrojs/check` supports 7.
 - oxlint ignores `ignorePatterns` from extended configs, so presets export them. `options.typeAware` only works in the root config; nested `oxlint.config.ts` files (fixtures) pick up their own preset.
 - Components compose with Base UI's `render` prop (`useRender` + `mergeProps` from `@base-ui/react`), never `asChild`. No coss ui or other third-party registry dependency.
+- Take reference from public, well-maintained projects (shadcn-ui/ui, shadcn-ui/lint, Ultracite), not from company-internal repos.
 - Commit style: `chore:` / `feat:` / `fix:`, small and logical.
 
 ## Registry items
@@ -48,11 +49,11 @@ Add an item:
 
 ## Changesets and releases
 
-Published packages: `tooling/oxc-config`, `tooling/tsconfig`, `packages/theme` (`access: public`). `packages/ui` and the fixtures are ignored in `.changeset/config.json`.
+Published packages: `tooling/oxc-config`, `tooling/tsconfig`, `packages/theme` (`access: public`). `packages/ui` and the fixtures are private, so Changesets skips them.
 
 1. `bun run changeset`, pick the packages and bump type, describe the change.
 2. Commit the generated `.changeset/*.md` with the change.
-3. Versioning is `bun run version-packages`; publishing is `bun run release` (`changeset publish`) and runs from CI (`.github/workflows/release.yml` with `changesets/action@v2`, manual-only for now) once npm trusted publishing is configured. Never publish by hand and never from an agent session.
+3. `release.yml` follows shadcn-ui/lint: a `check` job picks the mode, a `version` job opens the "Version Packages" PR, and a `publish` job (the only one with `id-token: write`) publishes the tarballs `check` packed. It is manual-only for now; see `.github/RELEASING.md`. Changelogs use `@changesets/changelog-github`; private packages are never versioned or tagged (`privatePackages`). Never publish by hand and never from an agent session.
 4. Published packages set `publishConfig.provenance`, which needs trusted publishing from GitHub Actions. Published manifests must not use `workspace:` or `catalog:` in `dependencies` or `peerDependencies` (`npm publish` does not rewrite them). They are fine in `devDependencies`.
 
 ## Not done yet
