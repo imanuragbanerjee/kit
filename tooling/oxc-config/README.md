@@ -25,13 +25,14 @@ The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` re
 
 ## oxlint
 
-| Import                                       | Contents                                    |
-| -------------------------------------------- | ------------------------------------------- |
-| `@anuragbanerjee/oxc-config/oxlint`          | Ultracite `core` plus shared rule decisions |
-| `@anuragbanerjee/oxc-config/oxlint/react`    | `core` + `react`                            |
-| `@anuragbanerjee/oxc-config/oxlint/next`     | `core` + `react` + `next`                   |
-| `@anuragbanerjee/oxc-config/oxlint/astro`    | `core` + `react` + `astro`                  |
-| `@anuragbanerjee/oxc-config/oxlint/tanstack` | `core` + `react` + `tanstack`               |
+| Import                                       | Contents                                                           |
+| -------------------------------------------- | ------------------------------------------------------------------ |
+| `@anuragbanerjee/oxc-config/oxlint`          | Ultracite `core` plus shared rule decisions                        |
+| `@anuragbanerjee/oxc-config/oxlint/react`    | `core` + `react` + `shadcn`                                        |
+| `@anuragbanerjee/oxc-config/oxlint/next`     | `core` + `react` + `shadcn` + `next`                               |
+| `@anuragbanerjee/oxc-config/oxlint/astro`    | `core` + `react` + `shadcn` + `astro`                              |
+| `@anuragbanerjee/oxc-config/oxlint/tanstack` | `core` + `react` + `shadcn` + `tanstack`                           |
+| `@anuragbanerjee/oxc-config/oxlint/shadcn`   | Only the [`@shadcn/lint`](https://github.com/shadcn-ui/lint) rules |
 
 ```ts
 // oxlint.config.ts
@@ -46,6 +47,21 @@ export default defineConfig({
   // Presets cannot carry root options.
   options: { typeAware: true },
 });
+```
+
+The framework presets include [`@shadcn/lint`](https://github.com/shadcn-ui/lint) (Ultracite's `shadcn` preset, every rule at `error`, `allow: ["layout"]`). The package depends on the plugin and resolves it itself, so projects do not install it. Components and theme tokens are found through the project's `components.json`. Turn the restyle rules off for a directory that defines components:
+
+```ts
+overrides: [
+  {
+    files: ["packages/ui/src/components/**"],
+    rules: {
+      "shadcn/no-arbitrary-values": "off",
+      "shadcn/no-restyle": "off",
+      "shadcn/require-static-classes": "off",
+    },
+  },
+],
 ```
 
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings.
