@@ -1,16 +1,22 @@
 # @anuragbanerjee/oxlint-config
 
-Shared [oxlint](https://oxc.rs/docs/guide/usage/linter) presets, composed from [Ultracite](https://www.ultracite.ai)'s `core`, `react` and `next` presets. For formatting see `@anuragbanerjee/oxfmt-config`.
+Shared [oxlint](https://oxc.rs/docs/guide/usage/linter) presets, composed from [Ultracite](https://www.ultracite.ai)'s `core`, `react` and `next` presets. For formatting, see [`@anuragbanerjee/oxfmt-config`](https://www.npmjs.com/package/@anuragbanerjee/oxfmt-config).
+
+## Install
 
 ```sh
 bun add -d @anuragbanerjee/oxlint-config oxlint oxlint-tsgolint @shadcn/lint
 ```
+
+## Presets
 
 | Import                                | Contents                                    |
 | ------------------------------------- | ------------------------------------------- |
 | `@anuragbanerjee/oxlint-config`       | Ultracite `core` plus shared rule decisions |
 | `@anuragbanerjee/oxlint-config/react` | `core` + `react` + `shadcn`                 |
 | `@anuragbanerjee/oxlint-config/next`  | `core` + `react` + `shadcn` + `next`        |
+
+## Usage
 
 ```ts
 // oxlint.config.ts
@@ -26,6 +32,8 @@ export default defineConfig({
   options: { typeAware: true },
 });
 ```
+
+## shadcn/lint
 
 The framework presets include [`@shadcn/lint`](https://github.com/shadcn-ui/lint) (Ultracite's `shadcn` preset, every rule at `error`, `allow: ["layout"]`). Oxlint resolves the plugin relative to your config file, so install it in every project that has an `oxlint.config.ts`: `bun add -d @shadcn/lint`. Components and theme tokens are found through the project's `components.json`. Directories named `components/ui` are already exempt from the restyle rules; for another directory that defines components, turn them off:
 
