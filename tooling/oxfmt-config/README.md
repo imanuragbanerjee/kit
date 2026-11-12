@@ -20,3 +20,5 @@ export default defineConfig({
 ```
 
 The spread is shallow: overriding `sortImports` or `sortTailwindcss` replaces the whole nested object.
+
+Part of [kit](https://github.com/imanuragbanerjee/kit).

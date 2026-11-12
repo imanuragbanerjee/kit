@@ -43,3 +43,5 @@ overrides: [
 ```
 
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings.
+
+Part of [kit](https://github.com/imanuragbanerjee/kit).
