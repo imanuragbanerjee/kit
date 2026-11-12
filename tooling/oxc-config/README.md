@@ -62,4 +62,6 @@ overrides: [
 ],
 ```
 
+Ultracite's `astro` preset has no rules yet, so `oxlint/astro` currently behaves like `oxlint/react`. Oxlint lints only the script (frontmatter) of `.astro` files, not the markup.
+
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings.
