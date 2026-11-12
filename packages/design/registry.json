@@ -31,10 +31,10 @@
       "docs": "Run `shadcn add button` (or any primitive) next; it installs from shadcn's registry in the base-vega style."
     },
     {
-      "name": "theme-base",
+      "name": "theme",
       "type": "registry:theme",
-      "title": "Theme: Base",
-      "description": "Neutral grayscale (the shadcn neutral palette).",
+      "title": "Theme",
+      "description": "The default neutral palette (shadcn neutral).",
       "cssVars": {
         "light": {
           "background": "oklch(1 0 0)",
