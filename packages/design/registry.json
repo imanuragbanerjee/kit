@@ -2,6 +2,35 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "items": [
     {
+      "name": "personal",
+      "type": "registry:base",
+      "title": "Personal",
+      "description": "A complete project setup: shadcn base-vega on Base UI, lucide icons, Geist fonts and the personal theme.",
+      "config": {
+        "style": "base-vega",
+        "iconLibrary": "lucide",
+        "tailwind": {
+          "baseColor": "neutral"
+        }
+      },
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "cn",
+        "lucide-react",
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "font-geist",
+        "font-geist-mono",
+        "imanuragbanerjee/kit/theme-personal"
+      ],
+      "css": {
+        "@import \"tw-animate-css\"": {}
+      },
+      "docs": "Run `shadcn add button` (or any primitive) next; it installs from shadcn's registry in the base-vega style."
+    },
+    {
       "name": "theme-base",
       "type": "registry:theme",
       "title": "Theme: Base",

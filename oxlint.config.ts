@@ -4,6 +4,11 @@ import { defineConfig } from "oxlint";
 
 export default defineConfig({
   extends: [react],
-  ignorePatterns: [...ignorePatterns, "**/r", "**/components/ui/**"],
+  ignorePatterns: [
+    ...ignorePatterns,
+    "**/r",
+    "**/components/ui/**",
+    "registry/files/**",
+  ],
   options: { typeAware: true },
 });

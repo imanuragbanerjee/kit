@@ -2,5 +2,9 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "anuragbanerjee",
   "homepage": "https://github.com/imanuragbanerjee/kit",
-  "include": ["packages/ui/registry.json", "packages/design/registry.json"]
+  "include": [
+    "packages/ui/registry.json",
+    "packages/design/registry.json",
+    "registry/registry.json"
+  ]
 }
