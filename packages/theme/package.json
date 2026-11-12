@@ -1,7 +1,7 @@
 {
   "name": "@anuragbanerjee/theme",
   "version": "0.0.0",
-  "description": "Tailwind v4 theme for personal projects: shadcn colour mapping, fonts, typography and colour themes. CSS only.",
+  "description": "Tailwind v4 theme for personal projects: shadcn colour mapping, fonts and colour themes. CSS only.",
   "keywords": [
     "shadcn",
     "tailwind",
@@ -37,10 +37,6 @@
       "style": "./fonts.css",
       "default": "./fonts.css"
     },
-    "./typography": {
-      "style": "./typography.css",
-      "default": "./typography.css"
-    },
     "./themes/*": {
       "style": "./themes/*.css",
       "default": "./themes/*.css"
@@ -48,19 +44,16 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "devDependencies": {
     "@fontsource-variable/geist": "catalog:",
     "@fontsource-variable/geist-mono": "catalog:",
-    "@tailwindcss/typography": "catalog:",
     "tailwindcss": "catalog:"
   },
   "peerDependencies": {
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
-    "@tailwindcss/typography": "^0.5.20",
     "tailwindcss": "^4.3.5"
   },
   "peerDependenciesMeta": {
@@ -68,9 +61,6 @@
       "optional": true
     },
     "@fontsource-variable/geist-mono": {
-      "optional": true
-    },
-    "@tailwindcss/typography": {
       "optional": true
     }
   }

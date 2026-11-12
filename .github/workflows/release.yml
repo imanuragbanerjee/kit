@@ -18,13 +18,7 @@ jobs:
       pack-dir-artifact-id: ${{ steps.pack.outputs.pack-dir-artifact-id }}
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .tool-versions
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version-file: .tool-versions
-      - run: bun install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - id: mode
         uses: changesets/action/select-mode@v2
       - if: steps.mode.outputs.mode == 'publish'

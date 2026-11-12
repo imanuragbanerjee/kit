@@ -10,6 +10,7 @@ export default defineConfig({
     ".changeset/*.md",
     "**/CHANGELOG.md",
   ],
+  overrides: [{ files: ["packages/ui/src/**"], options: { semi: false } }],
   sortTailwindcss: {
     functions: ["cn", "cva", "clsx"],
     stylesheet: "./packages/ui/src/styles/globals.css",

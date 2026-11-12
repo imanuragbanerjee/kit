@@ -3,7 +3,6 @@
   "display": "Astro (with React islands)",
   "extends": "./react-library.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
     "jsxImportSource": "react",
     "allowImportingTsExtensions": true,
     "allowJs": true

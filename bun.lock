@@ -20,7 +20,6 @@
         "taze": "catalog:",
         "turbo": "catalog:",
         "typescript": "catalog:",
-        "ultracite": "catalog:",
       },
     },
     "fixtures/astro": {
@@ -32,7 +31,6 @@
         "@base-ui/react": "catalog:",
         "@fontsource-variable/geist": "catalog:",
         "@fontsource-variable/geist-mono": "catalog:",
-        "@tailwindcss/typography": "catalog:",
         "@tailwindcss/vite": "catalog:",
         "astro": "catalog:",
         "class-variance-authority": "catalog:",
@@ -40,13 +38,13 @@
         "react": "catalog:",
         "react-dom": "catalog:",
         "tailwindcss": "catalog:",
+        "tw-animate-css": "catalog:",
       },
       "devDependencies": {
         "@anuragbanerjee/oxc-config": "workspace:*",
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@astrojs/check": "catalog:",
         "@shadcn/lint": "catalog:",
-        "@types/node": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
         "oxlint": "catalog:",
@@ -67,6 +65,7 @@
         "next": "catalog:",
         "react": "catalog:",
         "react-dom": "catalog:",
+        "tw-animate-css": "catalog:",
       },
       "devDependencies": {
         "@anuragbanerjee/oxc-config": "workspace:*",
@@ -88,19 +87,16 @@
       "devDependencies": {
         "@fontsource-variable/geist": "catalog:",
         "@fontsource-variable/geist-mono": "catalog:",
-        "@tailwindcss/typography": "catalog:",
         "tailwindcss": "catalog:",
       },
       "peerDependencies": {
         "@fontsource-variable/geist": "^5.3.0",
         "@fontsource-variable/geist-mono": "^5.3.0",
-        "@tailwindcss/typography": "^0.5.20",
         "tailwindcss": "^4.3.5",
       },
       "optionalPeers": [
         "@fontsource-variable/geist",
         "@fontsource-variable/geist-mono",
-        "@tailwindcss/typography",
       ],
     },
     "packages/ui": {
@@ -116,7 +112,6 @@
       },
       "devDependencies": {
         "@anuragbanerjee/tsconfig": "workspace:*",
-        "@types/node": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
         "react-dom": "catalog:",
@@ -140,10 +135,10 @@
         "typescript": "catalog:",
       },
       "peerDependencies": {
-        "@astrojs/compiler-rs": ">=0.5.3",
-        "@shadcn/lint": ">=0.2.5",
-        "oxfmt": ">=0.78.0",
-        "oxlint": ">=1.93.0",
+        "@astrojs/compiler-rs": ">=0.5.3 <1",
+        "@shadcn/lint": ">=0.2.5 <1",
+        "oxfmt": ">=0.78.0 <1",
+        "oxlint": "^1.93.0",
         "oxlint-tsgolint": ">=7.0.2006",
       },
       "optionalPeers": [
@@ -173,7 +168,6 @@
     "@fontsource-variable/geist-mono": "^5.3.0",
     "@shadcn/lint": "^0.2.5",
     "@tailwindcss/postcss": "^4.3.5",
-    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
@@ -749,8 +743,6 @@
 
     "@tailwindcss/postcss": ["@tailwindcss/postcss@4.3.5", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "@tailwindcss/node": "4.3.5", "@tailwindcss/oxide": "4.3.5", "postcss": "^8.5.25", "tailwindcss": "4.3.5" } }, "sha512-FAV37Tlx9wBiT/hkfgVD0Q6CWsP2oUX3lf28nrfjW8+ksILjnpuFulUqWDfNR4/ZiEHHDRBX8DUTzD1Rys687A=="],
 
-    "@tailwindcss/typography": ["@tailwindcss/typography@0.5.20", "", { "dependencies": { "postcss-selector-parser": "6.0.10" }, "peerDependencies": { "tailwindcss": ">=3.0.0 || >=4.0.0 || insiders" } }, "sha512-hwbzQuNUfcPvbegQFatVPl/MY/tcM9KLl963hQ5laJKPh81TEZ1+dNG9PirGvcaDBkp+BCshExAyKVPW91dozw=="],
-
     "@tailwindcss/vite": ["@tailwindcss/vite@4.3.5", "", { "dependencies": { "@tailwindcss/node": "4.3.5", "@tailwindcss/oxide": "4.3.5", "tailwindcss": "4.3.5" }, "peerDependencies": { "vite": "^5.2.0 || ^6 || ^7 || ^8" } }, "sha512-BCNiY0a1ZjdOHVqw7kyb7U72BwfMF3dfUuN+tQsLWky/J5JOI/r7abibglXfygrZhVO/3u3V+E25kkKTeMkXaQ=="],
 
     "@ts-morph/common": ["@ts-morph/common@0.27.0", "", { "dependencies": { "fast-glob": "^3.3.3", "minimatch": "^10.0.1", "path-browserify": "^1.0.1" } }, "sha512-Wf29UqxWDpc+i61k3oIOzcUfQt79PIT9y/MWfAGlrkjg6lBC1hwDECLXPVJAhWjiGbfBCxZd65F/LIZF3+jeJQ=="],
@@ -920,8 +912,6 @@
     "css-tree": ["css-tree@3.2.1", "", { "dependencies": { "mdn-data": "2.27.1", "source-map-js": "^1.2.1" } }, "sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA=="],
 
     "css-what": ["css-what@7.0.0", "", {}, "sha512-wD5oz5xibMOPHzy13CyGmogB3phdvcDaB5t0W/Nr5Z2O/agcB8YwOz6e2Lsp10pNDzBoDO9nVa3RGs/2BttpHQ=="],
-
-    "cssesc": ["cssesc@3.0.0", "", { "bin": { "cssesc": "bin/cssesc" } }, "sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg=="],
 
     "csso": ["csso@5.0.5", "", { "dependencies": { "css-tree": "~2.2.0" } }, "sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ=="],
 
@@ -1634,8 +1624,6 @@
     "@tailwindcss/oxide-wasm32-wasi/@tybys/wasm-util": ["@tybys/wasm-util@0.10.4", "", { "dependencies": { "tslib": "^2.4.0" }, "bundled": true }, "sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A=="],
 
     "@tailwindcss/oxide-wasm32-wasi/tslib": ["tslib@2.9.1", "", { "bundled": true }, "sha512-a4Ux9VKuIMHsOS7ENbEq6hK2ZGYIT27Rtl0E4eD9KqwxhKiQeMZE/9xb3IdYwWaSOyIBQLExhQgXDTYoiCxnWA=="],
-
-    "@tailwindcss/typography/postcss-selector-parser": ["postcss-selector-parser@6.0.10", "", { "dependencies": { "cssesc": "^3.0.0", "util-deprecate": "^1.0.2" } }, "sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w=="],
 
     "@vscode/emmet-helper/jsonc-parser": ["jsonc-parser@2.3.1", "", {}, "sha512-H8jvkz1O50L3dMZCsLqiuB2tA7muqbSg1AtGEkN0leAqGjsUzDJir3Zwr02BhqdcITPg3ei3mZ+HjMocAknhhg=="],
 

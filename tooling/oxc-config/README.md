@@ -3,7 +3,7 @@
 Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react`, `next` and `astro` presets.
 
 ```sh
-bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint
+bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint @shadcn/lint
 ```
 
 ## oxfmt

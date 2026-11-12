@@ -48,8 +48,7 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
@@ -66,10 +65,10 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@astrojs/compiler-rs": ">=0.5.3",
-    "@shadcn/lint": ">=0.2.5",
-    "oxfmt": ">=0.78.0",
-    "oxlint": ">=1.93.0",
+    "@astrojs/compiler-rs": ">=0.5.3 <1",
+    "@shadcn/lint": ">=0.2.5 <1",
+    "oxfmt": ">=0.78.0 <1",
+    "oxlint": "^1.93.0",
     "oxlint-tsgolint": ">=7.0.2006"
   },
   "peerDependenciesMeta": {

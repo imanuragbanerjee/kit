@@ -5,7 +5,3 @@
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 }
-
-@theme inline {
-  --font-heading: var(--font-sans);
-}

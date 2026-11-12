@@ -33,6 +33,6 @@ See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsc
 
 Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), which any static host can serve; then `shadcn add https://<host>/theme-personal.json`. Locally, `shadcn add ./r/theme-personal.json` works after a build.
 
-GitHub-direct (`shadcn add imanuragbanerjee/kit/button`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme-personal#<sha>`.
+GitHub-direct (`shadcn add imanuragbanerjee/kit/theme-personal`) reads the source `registry.json` with no build. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme-personal#<sha>`.
 
 `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.

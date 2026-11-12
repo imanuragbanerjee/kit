@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@anuragbanerjee/tsconfig": "workspace:*",
-    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "react-dom": "catalog:",
