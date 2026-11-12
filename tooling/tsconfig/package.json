@@ -29,7 +29,8 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "peerDependencies": {
     "typescript": ">=6.0.0"
