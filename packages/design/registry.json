@@ -2,10 +2,39 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "items": [
     {
-      "name": "theme-base",
+      "name": "preset",
+      "type": "registry:base",
+      "title": "Preset",
+      "description": "A complete project setup: shadcn base-vega on Base UI, lucide icons, Geist fonts and the personal theme.",
+      "config": {
+        "style": "base-vega",
+        "iconLibrary": "lucide",
+        "tailwind": {
+          "baseColor": "neutral"
+        }
+      },
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "cn",
+        "lucide-react",
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "font-geist",
+        "font-geist-mono",
+        "imanuragbanerjee/kit/personal"
+      ],
+      "css": {
+        "@import \"tw-animate-css\"": {}
+      },
+      "docs": "Run `shadcn add button` (or any primitive) next; it installs from shadcn's registry in the base-vega style."
+    },
+    {
+      "name": "theme",
       "type": "registry:theme",
-      "title": "Theme: Base",
-      "description": "Neutral grayscale (the shadcn neutral palette).",
+      "title": "Theme",
+      "description": "The default neutral palette (shadcn neutral).",
       "cssVars": {
         "light": {
           "background": "oklch(1 0 0)",
@@ -76,9 +105,9 @@
       }
     },
     {
-      "name": "theme-personal",
+      "name": "personal",
       "type": "registry:theme",
-      "title": "Theme: Personal",
+      "title": "Personal",
       "description": "Neutral palette with translucent surfaces.",
       "cssVars": {
         "light": {

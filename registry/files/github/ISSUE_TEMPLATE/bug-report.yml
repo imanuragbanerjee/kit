@@ -1,0 +1,11 @@
+name: Bug
+description: Something is broken.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Steps to reproduce help.
+    validations:
+      required: true
