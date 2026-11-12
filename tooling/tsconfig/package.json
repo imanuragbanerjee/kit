@@ -1,6 +1,6 @@
 {
   "name": "@anuragbanerjee/tsconfig",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared tsconfig bases (base, react-library, Next.js).",
   "keywords": [
     "tsconfig",

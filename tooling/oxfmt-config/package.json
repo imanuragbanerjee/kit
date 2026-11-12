@@ -1,6 +1,6 @@
 {
   "name": "@anuragbanerjee/oxfmt-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared oxfmt options (spread into your own config).",
   "keywords": [
     "config",

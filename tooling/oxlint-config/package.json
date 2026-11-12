@@ -1,6 +1,6 @@
 {
   "name": "@anuragbanerjee/oxlint-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared oxlint presets (core, React, Next.js) with Ultracite and shadcn/lint rules.",
   "keywords": [
     "config",
