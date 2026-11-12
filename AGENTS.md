@@ -9,6 +9,7 @@ Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](READM
 - `packages/design` (private): CSS only; source of the theme registry items, plus the colour mapping and fonts that the fixture and `packages/ui` import.
 - `packages/ui` (private): our own components and `registry.json`, plus the vendored shadcn primitives in `src/components/ui`.
 - `fixtures/*` (private): a Next.js app; their `src/components/ui/button.tsx` comes from `shadcn add`.
+- `registry/`: registry items that are not components (`files/**` are templates copied into other projects). Template configs are named `*-config.ts` so oxlint does not treat them as nested configs.
 - Root `registry.json` only has `name`, `homepage` and `include`.
 
 Folder names match the package name suffix. Files and folders are kebab-case.
@@ -30,7 +31,9 @@ Folder names match the package name suffix. Files and folders are kebab-case.
 - Registry items do not republish primitives. They declare `registryDependencies: ["button"]` so consumers get upstream from shadcn.
 - Our components live in `packages/ui/src` outside `components/ui`. Use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
 
-Add an item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
+Items that are plain files (workflows, configs) go in `registry/registry.json` as `registry:item` with `registry:file` entries and `~/` targets.
+
+Add a component item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
 
 ## Themes
 
