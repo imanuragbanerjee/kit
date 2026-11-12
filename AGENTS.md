@@ -31,7 +31,7 @@ Folder names match the package name suffix. Files and folders are kebab-case.
 - Registry items do not republish primitives. They declare `registryDependencies: ["button"]` so consumers get upstream from shadcn.
 - Our components live in `packages/ui/src` outside `components/ui`. Use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
 
-Items that are plain files (workflows, configs) go in `registry/registry.json` as `registry:item` with `registry:file` entries and `~/` targets.
+Items that are plain files (workflows, configs) go in `registry/registry.json` as `registry:item` with `registry:file` entries and `~/` targets. `pages.yml` publishes `r/` to GitHub Pages for the `@kit` namespace.
 
 Add a component item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
 
