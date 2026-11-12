@@ -1,8 +1,8 @@
 name: Release
 
-# Manual until npm trusted publishing is configured and the GitHub account is
-# renamed (published packages record the repository URL permanently). Restore
-# the `push: branches: [main]` trigger when ready.
+# Manual until npm trusted publishing is configured (published packages record
+# the repository URL permanently, so confirm it first). Restore the
+# `push: branches: [main]` trigger when ready.
 on:
   workflow_dispatch:
 
@@ -11,24 +11,27 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: write
   pull-requests: write
-  id-token: write # npm Trusted Publishing (OIDC)
+  id-token: write # npm Trusted Publishing (OIDC) and provenance
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version-file: .tool-versions
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
           registry-url: https://registry.npmjs.org
-      - run: bun install --frozen-lockfile
-      - uses: changesets/action@v1
+
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: bun run version-packages
-          publish: bun run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          bun-version-file: .tool-versions
+
+      - run: bun install --frozen-lockfile
+
+      - uses: changesets/action@v2.1.2
+        with:
+          version-script: bun run version-packages
+          publish-script: bun run release

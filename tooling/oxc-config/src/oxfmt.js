@@ -46,7 +46,18 @@ const config = {
   proseWrap: "preserve",
   semi: true,
   singleQuote: false,
+  // Type imports first, then Node, then packages, then the project's own
+  // `@/` and `~/` aliases, then relative paths.
   sortImports: {
+    groups: [
+      "type",
+      { newlinesBetween: false },
+      "builtin",
+      { newlinesBetween: false },
+      "external",
+      "internal",
+      ["parent", "sibling", "index"],
+    ],
     newlinesBetween: true,
   },
   sortPackageJson: true,

@@ -1,9 +1,17 @@
 name: CI
 
+env:
+  DO_NOT_TRACK: 1
+
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -11,10 +19,45 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: .tool-versions
+
       - run: bun install --frozen-lockfile
-      - run: bun run verify
+
+      # Turborepo's task cache replays unchanged packages, per
+      # https://turborepo.dev/docs/guides/ci-vendors/github-actions
+      - uses: actions/cache@v6
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Check formatting
+        run: bun run format:check
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Build
+        run: bun run build
+
+      # Builds the registry, installs the Button into every fixture from a
+      # local server and builds each fixture.
+      - name: Test registry install
+        run: bun run test:fixtures
+
+      - name: Fixtures match the registry source
+        run: git diff --exit-code -- fixtures

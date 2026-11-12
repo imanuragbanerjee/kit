@@ -1,9 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
 import type { ReactElement } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button";
-
-export const Route = createFileRoute("/")({ component: Home });
 
 function Home(): ReactElement {
   return (
@@ -22,3 +20,5 @@ function Home(): ReactElement {
     </main>
   );
 }
+
+export const Route = createFileRoute("/")({ component: Home });

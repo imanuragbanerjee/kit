@@ -15,10 +15,12 @@ Folder names equal the package name suffix (`tooling/oxc-config` is `@anuragbane
 
 ## Conventions
 
-- Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files.
+- Format with oxfmt, lint with oxlint (type-aware). Run `bun run check` before committing; hooks run on staged files. CI (`.github/workflows/ci.yml`) runs format check, lint, typecheck, build and `test:fixtures`, then fails if the fixtures drift from the registry source.
 - `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
 - `astro check` needs TypeScript 6, so TypeScript is pinned to `^6` in the catalog.
 - `prepare` is `lefthook install || true` (it fails without a `.git`).
+- Bun uses the isolated linker (`bunfig.toml`), so a package can only import what it declares; an undeclared (phantom) dependency fails the build. Do not switch it back to hoisted.
+- Every external version lives once in the root `workspaces.catalog`; package manifests use `catalog:`. Exceptions: `peerDependencies` (explicit ranges) and `dependencies` of published packages (explicit, see Changesets below). `bun run taze` reports updates, `bun run taze:fix` writes them; TypeScript stays on 6 until `@astrojs/check` supports 7.
 - oxlint ignores `ignorePatterns` from extended configs, so presets export them. `options.typeAware` only works in the root config; nested `oxlint.config.ts` files (fixtures) pick up their own preset.
 - Components compose with Base UI's `render` prop (`useRender` + `mergeProps` from `@base-ui/react`), never `asChild`. No coss ui or other third-party registry dependency.
 - Commit style: `chore:` / `feat:` / `fix:`, small and logical.
@@ -50,8 +52,8 @@ Published packages: `tooling/oxc-config`, `tooling/tsconfig`, `packages/theme` (
 
 1. `bun run changeset`, pick the packages and bump type, describe the change.
 2. Commit the generated `.changeset/*.md` with the change.
-3. Versioning is `bun run version-packages`; publishing is `bun run release` (`changeset publish`) and runs from CI (`.github/workflows/release.yml`, manual-only for now) once npm trusted publishing is configured. Never publish by hand and never from an agent session.
-4. Published manifests must not use `workspace:` or `catalog:` in `dependencies` or `peerDependencies` (`npm publish` does not rewrite them). They are fine in `devDependencies`.
+3. Versioning is `bun run version-packages`; publishing is `bun run release` (`changeset publish`) and runs from CI (`.github/workflows/release.yml` with `changesets/action@v2`, manual-only for now) once npm trusted publishing is configured. Never publish by hand and never from an agent session.
+4. Published packages set `publishConfig.provenance`, which needs trusted publishing from GitHub Actions. Published manifests must not use `workspace:` or `catalog:` in `dependencies` or `peerDependencies` (`npm publish` does not rewrite them). They are fine in `devDependencies`.
 
 ## Not done yet
 

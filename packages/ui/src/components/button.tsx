@@ -1,10 +1,10 @@
 "use client"
 
+import type { VariantProps } from "class-variance-authority"
+import type { ButtonHTMLAttributes, ReactElement } from "react"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
-import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
-import type { ButtonHTMLAttributes, ReactElement } from "react"
 
 import { cn } from "@/registry/kit/lib/utils"
 
