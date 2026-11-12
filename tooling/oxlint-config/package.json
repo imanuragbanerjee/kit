@@ -1,15 +1,15 @@
 {
-  "name": "@anuragbanerjee/oxc-config",
+  "name": "@anuragbanerjee/oxlint-config",
   "version": "0.0.0",
-  "description": "Shared oxfmt and oxlint presets (core, React, Next.js, shadcn) for personal projects.",
+  "description": "Shared oxlint presets (core, React, Next.js) with Ultracite and shadcn/lint rules.",
   "keywords": [
     "config",
     "oxc",
-    "oxfmt",
     "oxlint",
+    "shadcn",
     "ultracite"
   ],
-  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/tooling/oxc-config#readme",
+  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/tooling/oxlint-config#readme",
   "bugs": {
     "url": "https://github.com/imanuragbanerjee/kit/issues"
   },
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imanuragbanerjee/kit.git",
-    "directory": "tooling/oxc-config"
+    "directory": "tooling/oxlint-config"
   },
   "files": [
     "src",
@@ -25,21 +25,17 @@
   ],
   "type": "module",
   "exports": {
-    "./oxfmt": {
-      "types": "./src/oxfmt.d.ts",
-      "default": "./src/oxfmt.js"
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
     },
-    "./oxlint": {
-      "types": "./src/oxlint.d.ts",
-      "default": "./src/oxlint.js"
+    "./react": {
+      "types": "./src/react.d.ts",
+      "default": "./src/react.js"
     },
-    "./oxlint/react": {
-      "types": "./src/oxlint-react.d.ts",
-      "default": "./src/oxlint-react.js"
-    },
-    "./oxlint/next": {
-      "types": "./src/oxlint-next.d.ts",
-      "default": "./src/oxlint-next.js"
+    "./next": {
+      "types": "./src/next.d.ts",
+      "default": "./src/next.js"
     },
     "./package.json": "./package.json"
   },
@@ -56,21 +52,16 @@
     "@anuragbanerjee/tsconfig": "workspace:*",
     "@shadcn/lint": "catalog:",
     "@types/node": "catalog:",
-    "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
     "@shadcn/lint": ">=0.2.5 <1",
-    "oxfmt": ">=0.78.0 <1",
     "oxlint": "^1.93.0",
     "oxlint-tsgolint": ">=7.0.2006"
   },
   "peerDependenciesMeta": {
     "@shadcn/lint": {
-      "optional": true
-    },
-    "oxfmt": {
       "optional": true
     },
     "oxlint": {

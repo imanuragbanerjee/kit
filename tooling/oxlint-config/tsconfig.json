@@ -1,0 +1,9 @@
+{
+  "extends": "@anuragbanerjee/tsconfig/base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

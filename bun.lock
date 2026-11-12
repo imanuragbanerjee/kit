@@ -5,7 +5,8 @@
     "": {
       "name": "kit",
       "devDependencies": {
-        "@anuragbanerjee/oxc-config": "workspace:*",
+        "@anuragbanerjee/oxfmt-config": "workspace:*",
+        "@anuragbanerjee/oxlint-config": "workspace:*",
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@changesets/changelog-github": "catalog:",
         "@changesets/cli": "catalog:",
@@ -37,7 +38,7 @@
         "tw-animate-css": "catalog:",
       },
       "devDependencies": {
-        "@anuragbanerjee/oxc-config": "workspace:*",
+        "@anuragbanerjee/oxlint-config": "workspace:*",
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@shadcn/lint": "catalog:",
         "@tailwindcss/postcss": "catalog:",
@@ -80,8 +81,21 @@
         "typescript": "catalog:",
       },
     },
-    "tooling/oxc-config": {
-      "name": "@anuragbanerjee/oxc-config",
+    "tooling/oxfmt-config": {
+      "name": "@anuragbanerjee/oxfmt-config",
+      "version": "0.0.0",
+      "devDependencies": {
+        "@anuragbanerjee/tsconfig": "workspace:*",
+        "@types/node": "catalog:",
+        "oxfmt": "catalog:",
+        "typescript": "catalog:",
+      },
+      "peerDependencies": {
+        "oxfmt": ">=0.78.0 <1",
+      },
+    },
+    "tooling/oxlint-config": {
+      "name": "@anuragbanerjee/oxlint-config",
       "version": "0.0.0",
       "dependencies": {
         "ultracite": "^8.2.0",
@@ -90,19 +104,16 @@
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@shadcn/lint": "catalog:",
         "@types/node": "catalog:",
-        "oxfmt": "catalog:",
         "oxlint": "catalog:",
         "typescript": "catalog:",
       },
       "peerDependencies": {
         "@shadcn/lint": ">=0.2.5 <1",
-        "oxfmt": ">=0.78.0 <1",
         "oxlint": "^1.93.0",
         "oxlint-tsgolint": ">=7.0.2006",
       },
       "optionalPeers": [
         "@shadcn/lint",
-        "oxfmt",
         "oxlint",
         "oxlint-tsgolint",
       ],
@@ -152,7 +163,9 @@
 
     "@anuragbanerjee/fixture-next": ["@anuragbanerjee/fixture-next@workspace:fixtures/next"],
 
-    "@anuragbanerjee/oxc-config": ["@anuragbanerjee/oxc-config@workspace:tooling/oxc-config"],
+    "@anuragbanerjee/oxfmt-config": ["@anuragbanerjee/oxfmt-config@workspace:tooling/oxfmt-config"],
+
+    "@anuragbanerjee/oxlint-config": ["@anuragbanerjee/oxlint-config@workspace:tooling/oxlint-config"],
 
     "@anuragbanerjee/tsconfig": ["@anuragbanerjee/tsconfig@workspace:tooling/tsconfig"],
 

@@ -2,13 +2,14 @@
 
 Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose; a Next.js fixture covers it.
 
-| Path                 | Package                      | Published       | What                                                |
-| -------------------- | ---------------------------- | --------------- | --------------------------------------------------- |
-| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next) |
-| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs)        |
-| `packages/design`    | `@anuragbanerjee/design`     | never (private) | Tailwind v4 CSS: colour mapping, fonts, themes      |
-| `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)      |
-| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | A minimal Next.js app that consumes it              |
+| Path                    | Package                         | Published       | What                                           |
+| ----------------------- | ------------------------------- | --------------- | ---------------------------------------------- |
+| `tooling/oxfmt-config`  | `@anuragbanerjee/oxfmt-config`  | npm             | oxfmt options                                  |
+| `tooling/oxlint-config` | `@anuragbanerjee/oxlint-config` | npm             | oxlint presets (core, react, next)             |
+| `tooling/tsconfig`      | `@anuragbanerjee/tsconfig`      | npm             | tsconfig bases (base, react-library, nextjs)   |
+| `packages/design`       | `@anuragbanerjee/design`        | never (private) | Tailwind v4 CSS: colour mapping, fonts, themes |
+| `packages/ui`           | `@anuragbanerjee/ui`            | never (private) | Home of our own registry components (none yet) |
+| `fixtures/*`            | `@anuragbanerjee/fixture-*`     | never (private) | A minimal Next.js app that consumes it         |
 
 The npm packages are not published yet.
 
@@ -25,7 +26,7 @@ Other scripts: `check`, `lint:fix`, `registry:build`, `registry:validate`, `test
 
 ## Using the packages
 
-See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsconfig](tooling/tsconfig/README.md), [design](packages/design/README.md).
+See the README in each package: [oxfmt-config](tooling/oxfmt-config/README.md), [oxlint-config](tooling/oxlint-config/README.md), [tsconfig](tooling/tsconfig/README.md), [design](packages/design/README.md).
 
 ## Using the registry
 

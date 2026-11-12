@@ -10,7 +10,8 @@
       "title": "Project files",
       "description": "Editor, git hook and lint setup: .editorconfig, lefthook.yml, VS Code settings, oxfmt and oxlint configs and an AGENTS.md starter.",
       "devDependencies": [
-        "@anuragbanerjee/oxc-config",
+        "@anuragbanerjee/oxfmt-config",
+        "@anuragbanerjee/oxlint-config",
         "@shadcn/lint",
         "lefthook",
         "oxfmt",

@@ -4,7 +4,7 @@ Bun workspaces, Turborepo, Changesets. [README.md](README.md) has the layout, se
 
 ## Layout notes
 
-- `tooling/oxc-config`: raw JS plus hand-written `.d.ts`, no build. oxfmt has no `extends`, so consumers spread the preset. The framework presets include Ultracite's `shadcn` preset, so projects that lint with them install `@shadcn/lint`.
+- `tooling/oxfmt-config` and `tooling/oxlint-config`: raw JS plus hand-written `.d.ts`, no build. oxfmt has no `extends`, so consumers spread the preset. Packages are named `@anuragbanerjee/<tool>-config` (`tsconfig` is the exception, since that is the tool's own name). The oxlint framework presets include Ultracite's `shadcn` preset, so projects that lint with them install `@shadcn/lint`.
 - `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
 - Root `registry.json` has `include` plus `items` for the GitHub and project-file items. Those items point at this repo's own files (`.github/**`, `.editorconfig`, `lefthook.yml`, `.vscode`), so edit those files directly: they are what we run and what we publish.
 - `templates/` holds the generic starter files that are not ours (`AGENTS.md`, oxfmt/oxlint stubs). Name config templates `*-config.ts` so oxlint does not treat them as nested configs.
@@ -37,7 +37,7 @@ Installed with the skills.sh CLI (`.agents/skills`, symlinked from `.claude/skil
 
 ## Releases
 
-Published to npm: `tooling/oxc-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
+Published to npm: `tooling/oxfmt-config`, `tooling/oxlint-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
 
 ## Not done yet
 

@@ -1,5 +1,6 @@
 ---
-"@anuragbanerjee/oxc-config": minor
+"@anuragbanerjee/oxfmt-config": minor
+"@anuragbanerjee/oxlint-config": minor
 "@anuragbanerjee/tsconfig": minor
 ---
 
