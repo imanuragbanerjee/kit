@@ -48,7 +48,7 @@ With the hosted `@anurag` namespace (GitHub Pages), add this to `components.json
 ```json
 {
   "registries": {
-    "@anurag": "https://imanuragbanerjee.github.io/kit/{name}.json"
+    "@anurag": "https://kit.anuragbanerjee.dev/{name}.json"
   }
 }
 ```
