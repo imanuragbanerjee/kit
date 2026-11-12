@@ -2,5 +2,5 @@
 
 @import "@anuragbanerjee/theme/base";
 @import "@anuragbanerjee/theme/fonts";
-@import "@anuragbanerjee/theme/themes/default";
-@import "@anuragbanerjee/theme/themes/brand";
+@import "@anuragbanerjee/theme/themes/base";
+@import "@anuragbanerjee/theme/themes/personal";

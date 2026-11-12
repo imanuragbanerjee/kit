@@ -3,5 +3,4 @@
 @import "@anuragbanerjee/theme/base";
 @import "@anuragbanerjee/theme/fonts";
 @import "@anuragbanerjee/theme/typography";
-@import "@anuragbanerjee/theme/themes/default";
-@import "@anuragbanerjee/theme/themes/ocean";
+@import "@anuragbanerjee/theme/themes/base";

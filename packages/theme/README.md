@@ -14,20 +14,18 @@ bun add @fontsource-variable/geist @fontsource-variable/geist-mono @tailwindcss/
 @import "@anuragbanerjee/theme/base";
 @import "@anuragbanerjee/theme/fonts"; /* optional, needs the fontsource peers */
 @import "@anuragbanerjee/theme/typography"; /* optional, needs @tailwindcss/typography */
-@import "@anuragbanerjee/theme/themes/default";
-@import "@anuragbanerjee/theme/themes/brand";
+@import "@anuragbanerjee/theme/themes/base";
+@import "@anuragbanerjee/theme/themes/personal";
 ```
 
-| Import           | Contents                                                            |
-| ---------------- | ------------------------------------------------------------------- |
-| `base`           | `@theme inline` colour and radius mapping, dark variant, base layer |
-| `fonts`          | Geist Sans and Mono via Fontsource, `--font-sans`, `--font-mono`    |
-| `typography`     | `@plugin "@tailwindcss/typography"`                                 |
-| `themes/default` | Neutral palette on `:root` and `.dark`                              |
-| `themes/brand`   | Placeholder indigo palette, opt in with `data-theme="brand"`        |
-| `themes/ocean`   | Blue-teal palette, `data-theme="ocean"`                             |
-| `themes/forest`  | Green palette, `data-theme="forest"`                                |
+| Import            | Contents                                                            |
+| ----------------- | ------------------------------------------------------------------- |
+| `base`            | `@theme inline` colour and radius mapping, dark variant, base layer |
+| `fonts`           | Geist Sans and Mono via Fontsource, `--font-sans`, `--font-mono`    |
+| `typography`      | `@plugin "@tailwindcss/typography"`                                 |
+| `themes/base`     | Neutral palette on `:root` and `.dark`                              |
+| `themes/personal` | Placeholder indigo palette, opt in with `data-theme="personal"`     |
 
-Dark mode follows a `.dark` class on an ancestor. Pair a theme with it, for example `<html class="dark" data-theme="ocean">`.
+Dark mode follows a `.dark` class on an ancestor. Pair a theme with it, for example `<html class="dark" data-theme="personal">`.
 
-The same palettes ship as shadcn `registry:theme` items (`theme-default`, `theme-brand`, `theme-ocean`, `theme-forest`) from the repository registry.
+The same palettes ship as shadcn `registry:theme` items (`theme-base`, `theme-personal`) from the repository registry.
