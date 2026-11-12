@@ -25,7 +25,7 @@ bun add tw-animate-css shadcn
 | `base`            | `@theme inline` colour and radius mapping, dark variant, base layer |
 | `fonts`           | Geist Sans and Mono via Fontsource, `--font-sans`, `--font-mono`    |
 | `themes/base`     | Neutral palette on `:root` and `.dark`                              |
-| `themes/personal` | Placeholder indigo palette on `:root` and `.dark`                   |
+| `themes/personal` | Neutral palette with translucent surfaces on `:root` and `.dark`    |
 
 Import exactly one theme per app. Dark mode follows a `.dark` class on an ancestor.
 

@@ -20,4 +20,14 @@ Pull requests opened with `GITHUB_TOKEN` do not trigger the CI workflow. The rel
 
 Changesets skips packages marked `private` (`packages/ui` and the fixtures) and never versions or tags them.
 
+## Cadence and version numbers
+
+Pushes to `main` never publish. With the push trigger on, they only open or update the Version Packages PR, which accumulates every pending changeset. A release happens when you merge that PR, so you choose the cadence (for example weekly, or earlier by merging it yourself). However many changesets are batched, each package is bumped once per release, by the largest bump among them.
+
+To keep version numbers low:
+
+- Only add a changeset when a published package changes in a way consumers notice; docs, CI and fixture changes need none (`bun run changeset --empty` if a PR touches a published package but should not release).
+- Stay on `0.x` until the presets are stable: `patch` for fixes, `minor` for features and breaking changes.
+- Do not merge the Version PR on every push; let several changes accumulate.
+
 `release.yml` is manual (`workflow_dispatch`) until trusted publishing is set up and the repository URL is confirmed, because published packages record it permanently.
