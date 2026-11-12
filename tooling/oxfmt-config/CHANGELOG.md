@@ -1,5 +1,11 @@
 # @anuragbanerjee/oxfmt-config
 
+## 0.1.1
+
+### Patch Changes
+
+- [#16](https://github.com/imanuragbanerjee/kit/pull/16) [`d9abfd1`](https://github.com/imanuragbanerjee/kit/commit/d9abfd1b055793b3c109c28cc95c9d2e0642efb1) Thanks [@imanuragbanerjee](https://github.com/imanuragbanerjee)! - Polish the package READMEs: add the install command to tsconfig and link each package back to the repository.
+
 ## 0.1.0
 
 ### Minor Changes
