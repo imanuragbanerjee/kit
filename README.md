@@ -44,21 +44,21 @@ shadcn init imanuragbanerjee/kit/preset
 shadcn add imanuragbanerjee/kit/github-ci
 ```
 
-In a new project the first `init` needs a full address (the GitHub one above, or `https://kit.anuragbanerjee.dev/preset.json`), because `@anurag` only exists after `components.json` does.
+In a new project the first `init` needs a full address (the GitHub one above, or `https://kit.anuragbanerjee.dev/preset.json`), because `@anuragbanerjee` only exists after `components.json` does.
 
-With the hosted `@anurag` namespace (GitHub Pages), add this to `components.json` and use short names, search and the shadcn MCP server:
+With the hosted `@anuragbanerjee` namespace (GitHub Pages), add this to `components.json` and use short names, search and the shadcn MCP server:
 
 ```json
 {
   "registries": {
-    "@anurag": "https://kit.anuragbanerjee.dev/{name}.json"
+    "@anuragbanerjee": "https://kit.anuragbanerjee.dev/{name}.json"
   }
 }
 ```
 
 ```sh
-shadcn add @anurag/theme
-shadcn search @anurag
+shadcn add @anuragbanerjee/theme
+shadcn search @anuragbanerjee
 ```
 
 For addresses, pinning refs, private repos and updating (`--overwrite`), see shadcn's docs or the `shadcn` skill in `.agents/skills/shadcn`.
