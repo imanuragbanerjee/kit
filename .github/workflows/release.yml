@@ -1,7 +1,8 @@
 name: Release
 
-# Manual until npm trusted publishing is configured; then trigger on push to main.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}

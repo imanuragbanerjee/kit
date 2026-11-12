@@ -83,7 +83,7 @@
     },
     "tooling/oxfmt-config": {
       "name": "@anuragbanerjee/oxfmt-config",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "devDependencies": {
         "@anuragbanerjee/tsconfig": "workspace:*",
         "@types/node": "catalog:",
@@ -96,7 +96,7 @@
     },
     "tooling/oxlint-config": {
       "name": "@anuragbanerjee/oxlint-config",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "dependencies": {
         "ultracite": "^8.2.0",
       },
@@ -120,7 +120,7 @@
     },
     "tooling/tsconfig": {
       "name": "@anuragbanerjee/tsconfig",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "peerDependencies": {
         "typescript": ">=6.0.0",
       },
