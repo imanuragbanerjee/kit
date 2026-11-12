@@ -43,8 +43,23 @@ shadcn init imanuragbanerjee/kit/preset
 shadcn add imanuragbanerjee/kit/github-ci
 ```
 
+With the hosted `@anurag` namespace (GitHub Pages), add this to `components.json` and use short names, search and the shadcn MCP server:
+
+```json
+{
+  "registries": {
+    "@anurag": "https://imanuragbanerjee.github.io/kit/{name}.json"
+  }
+}
+```
+
+```sh
+shadcn add @anurag/theme
+shadcn search @anurag
+```
+
 The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our own components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's registry.
 
-`bun run registry:build` writes `r/*.json` (generated, git-ignored). Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/preset.json` and `shadcn add ./r/<item>.json` work locally after a build.
+`bun run registry:build` writes `r/*.json` (generated, git-ignored); `pages.yml` publishes it on every push to `main`. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/preset.json` and `shadcn add ./r/<item>.json` work locally after a build.
 
 Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.
