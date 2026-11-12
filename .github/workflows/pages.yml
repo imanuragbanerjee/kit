@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: bun run registry:build
+      - run: cp registry/index.html r/index.html
       - uses: actions/upload-pages-artifact@v5
         with:
           path: r
