@@ -29,7 +29,7 @@ See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsc
 
 ## Using the registry
 
-`registry.json` at the repo root includes `packages/ui/registry.json` (our components), `packages/design/registry.json` (the `preset` and two themes) and `registry/registry.json` (project and GitHub files).
+`registry.json` at the repo root includes `packages/ui/registry.json` (our components), `packages/design/registry.json` (the `preset` and two themes) and its own `items`, which point at this repo's real `.github`, `.editorconfig`, `lefthook.yml` and `.vscode` files, so we use exactly what we publish.
 
 | Item                                                                                     | Type  | What it does                                                                                                  |
 | ---------------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------- |
@@ -42,6 +42,8 @@ See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsc
 shadcn init imanuragbanerjee/kit/preset
 shadcn add imanuragbanerjee/kit/github-ci
 ```
+
+In a new project the first `init` needs a full address (the GitHub one above, or `https://kit.anuragbanerjee.dev/preset.json`), because `@anurag` only exists after `components.json` does.
 
 With the hosted `@anurag` namespace (GitHub Pages), add this to `components.json` and use short names, search and the shadcn MCP server:
 

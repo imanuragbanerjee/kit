@@ -8,7 +8,7 @@ export default defineConfig({
     ...ignorePatterns,
     "**/r",
     "**/components/ui/**",
-    "registry/files/**",
+    "templates/**",
   ],
   options: { typeAware: true },
 });
