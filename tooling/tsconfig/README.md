@@ -1,6 +1,6 @@
 # @anuragbanerjee/tsconfig
 
-Shared `tsconfig` bases. Requires TypeScript 6 or newer (`astro check` does not support TypeScript 7 yet).
+Shared `tsconfig` bases. Requires TypeScript 6 or newer. Astro projects that use `astro check` must stay on TypeScript 6.
 
 | File                 | Use                                             |
 | -------------------- | ----------------------------------------------- |

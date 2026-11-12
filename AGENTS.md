@@ -19,7 +19,7 @@ Folder names match the package name suffix. Files and folders are kebab-case.
 - Exact Node and Bun versions live only in `.tool-versions`; `package.json` has `devEngines` ranges.
 - Bun uses the isolated linker: a package can only import what it declares.
 - Every external version lives once in `workspaces.catalog` (use `catalog:`). Peer ranges and `dependencies` of published packages stay explicit.
-- TypeScript stays on 6 until `@astrojs/check` supports 7.
+- TypeScript 7 everywhere except `fixtures/astro`, which pins 6 because `astro check` does not support 7 (the upstream issues are closed without real support).
 - `options.typeAware` only works in the root oxlint config; nested configs (fixtures) use their own preset. Presets cannot carry `ignorePatterns`, so they are exported.
 - `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
 - Compose with Base UI's `render` prop (`nativeButton={false}` for non-buttons), never `asChild`. No coss ui or other third-party registry dependency.
