@@ -15,8 +15,8 @@ name: Release
 # Manual until npm trusted publishing is configured (published packages record
 # the repository URL permanently, so confirm it first). Restore the
 # `push: branches: [main]` trigger when ready. Actions use major version tags
-# (`@v7`). `changesets/action` publishes no floating v2 tag, so it uses the
-# exact tag (`@v2.1.2`). Dependabot proposes updates for both.
+# (`@v7`), and `changesets/action` its `v2` branch, which tracks the latest
+# 2.x. Dependabot proposes the next major.
 on:
   workflow_dispatch:
 
@@ -46,14 +46,14 @@ jobs:
       # "version" (changesets pending), "publish" (an unpublished version) or
       # "none"
       - id: mode
-        uses: changesets/action/select-mode@v2.1.2
+        uses: changesets/action/select-mode@v2
       - if: steps.mode.outputs.mode == 'publish'
         run: bun run verify
       - if: steps.mode.outputs.mode == 'publish'
         run: bun run test:fixtures
       - id: pack
         if: steps.mode.outputs.mode == 'publish'
-        uses: changesets/action/pack@v2.1.2
+        uses: changesets/action/pack@v2
         with:
           publish-plan-artifact-id: ${{ steps.mode.outputs.publish-plan-artifact-id }}
 
@@ -76,7 +76,7 @@ jobs:
           bun-version-file: .tool-versions
       # Root tooling only: changesets and its changelog plugin.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
-      - uses: changesets/action/version@v2.1.2
+      - uses: changesets/action/version@v2
         with:
           commit-message: "chore(release): version packages"
           pr-title: "chore(release): version packages"
@@ -103,6 +103,6 @@ jobs:
       # Root tooling only, no lifecycle scripts: the changesets CLI is the only
       # installed code this job runs.
       - run: bun install --frozen-lockfile --ignore-scripts --filter kit
-      - uses: changesets/action/publish@v2.1.2
+      - uses: changesets/action/publish@v2
         with:
           pack-dir-artifact-id: ${{ needs.check.outputs.pack-dir-artifact-id }}
