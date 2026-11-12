@@ -1,23 +1,19 @@
 # kit: agent reference
 
-Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](README.md). Keep everything framework-neutral: no Next-only code in the packages.
+Bun workspaces, Turborepo, Changesets. [README.md](README.md) has the layout, setup and registry items; this file only adds rules. Keep everything framework-neutral: no Next-only code in the packages.
 
-## Layout
+## Layout notes
 
-- `tooling/oxc-config`: oxfmt preset (spread it, oxfmt has no `extends`) and oxlint presets `./oxlint`, `./oxlint/{react,next}`. Raw JS plus hand-written `.d.ts`, no build. The framework presets include Ultracite's `shadcn` preset, so every project that lints with them needs `@shadcn/lint` installed.
+- `tooling/oxc-config`: raw JS plus hand-written `.d.ts`, no build. oxfmt has no `extends`, so consumers spread the preset. The framework presets include Ultracite's `shadcn` preset, so projects that lint with them install `@shadcn/lint`.
 - `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
-- `packages/design` (private): CSS only; source of the theme registry items, plus the colour mapping and fonts that the fixture and `packages/ui` import.
-- `packages/ui` (private): our own components and `registry.json`, plus the vendored shadcn primitives in `src/components/ui`.
-- `fixtures/*` (private): a Next.js app; their `src/components/ui/button.tsx` comes from `shadcn add`.
-- `registry/`: registry items that are not components (`files/**` are templates copied into other projects). Template configs are named `*-config.ts` so oxlint does not treat them as nested configs.
+- `registry/files/**` are templates copied into other projects. Name config templates `*-config.ts` so oxlint does not treat them as nested configs.
 - Root `registry.json` only has `name`, `homepage` and `include`.
-
-Folder names match the package name suffix. Files and folders are kebab-case.
+- Folder names match the package name suffix; files and folders are kebab-case.
 
 ## Conventions
 
 - oxfmt and oxlint (type-aware). Run `bun run check` before committing.
-- Exact Node and Bun versions live only in `.tool-versions`; `package.json` has `devEngines` ranges.
+- Exact Node and Bun versions live only in `.tool-versions`; `package.json` has `devEngines` ranges (Turborepo needs one of the two).
 - Bun uses the isolated linker: a package can only import what it declares.
 - Every external version lives once in `workspaces.catalog` (use `catalog:`). Peer ranges and `dependencies` of published packages stay explicit.
 - `options.typeAware` only works in the root oxlint config; nested configs (fixtures) use their own preset. Presets cannot carry `ignorePatterns`, so they are exported.
@@ -25,27 +21,23 @@ Folder names match the package name suffix. Files and folders are kebab-case.
 - Reference public projects (shadcn-ui/ui, shadcn-ui/lint, Ultracite), not company-internal repos.
 - Commits: `chore:` / `feat:` / `fix:`, small and logical.
 
-## shadcn primitives and registry items
+## shadcn
 
-- Never hand-edit `components/ui`. It is upstream `base-vega`, vendored for development only, excluded from oxfmt and oxlint. `bun run ui:sync` re-fetches it (add the name to that script for a new primitive); `upstream.yml` runs weekly and fails on a diff.
-- Registry items do not republish primitives. They declare `registryDependencies: ["button"]` so consumers get upstream from shadcn.
-- Our components live in `packages/ui/src` outside `components/ui`. Use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
+For registry authoring and CLI usage follow the `shadcn` skill (`.agents/skills/shadcn/registry.md`, `cli.md`).
 
-Items that are plain files (workflows, configs) go in `registry/registry.json` as `registry:item` with `registry:file` entries and `~/` targets. `pages.yml` publishes `r/` to GitHub Pages for the `@anurag` namespace.
-
-Add a component item: put it in `packages/ui/registry.json` with `files: [{ "path": "src/<name>.tsx", "type": "registry:ui", "target": "@ui/<name>.tsx" }]` (the `@ui/` target is required), then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored.
+- Never hand-edit `components/ui`: it is upstream `base-vega`, vendored for development only and excluded from oxfmt and oxlint. `bun run ui:sync` re-fetches it (add the name to that script for a new primitive); `upstream.yml` runs weekly and fails on a diff.
+- Registry items do not republish primitives; they declare `registryDependencies: ["button"]`.
+- Our components live in `packages/ui/src` outside `components/ui` and use `import { cn } from "cn"`. A component that needs `"use client"` must be formatted without semicolons, or the CLI will not strip it for `rsc: false` consumers.
+- Component items go in `packages/ui/registry.json` with `target: "@ui/<name>.tsx"` (required, or the CLI nests the file wrongly); plain-file items go in `registry/registry.json`. Then `bun run registry:build && bun run registry:validate`. `r/` is generated and git-ignored; `pages.yml` publishes it.
+- Themes: add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports one theme) and a matching item in `packages/design/registry.json` (`theme` for the default `base`, otherwise the name).
 
 ## Agent skills
 
-Installed with the skills.sh CLI into `.agents/skills` (symlinked from `.claude/skills`), locked in `skills-lock.json`: `shadcn`, `turborepo`, `vercel-react-best-practices`, `vercel-composition-patterns`, `web-design-guidelines`, `writing-guidelines`. Update with `bunx skills update`; they are third-party files, so do not edit them and keep them out of oxfmt and oxlint.
-
-## Themes
-
-Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching item in `packages/design/registry.json` (`theme` for the default `base`, `theme-<name>` for the rest), and a README row.
+Installed with the skills.sh CLI (`.agents/skills`, symlinked from `.claude/skills`, locked in `skills-lock.json`). Update with `bunx skills update`; they are third-party files, so do not edit them and keep them out of oxfmt and oxlint.
 
 ## Releases
 
-Published to npm: `tooling/oxc-config` and `tooling/tsconfig`. Themes are delivered through the registry only. Add a changeset with `bun run changeset`. `release.yml` (split `check`, `version`, `publish` jobs, manual for now) is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm because trusted publishing and provenance are npm features. Never publish by hand or from an agent session.
+Published to npm: `tooling/oxc-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
 
 ## Not done yet
 

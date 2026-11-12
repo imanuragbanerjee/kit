@@ -10,18 +10,18 @@ Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry
 | `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)      |
 | `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | A minimal Next.js app that consumes it              |
 
-Not published to npm yet.
+The npm packages are not published yet.
 
 ## Setup
 
-The exact Node and Bun versions live only in `.tool-versions`; local tooling (mise, asdf) and every CI workflow read them from there. `package.json` carries `devEngines` ranges (`node >=26`, `bun ^1.4.4`), which Turborepo needs to detect the package manager but which are compatibility ranges, not pins.
+Node and Bun versions come from `.tool-versions`.
 
 ```sh
 bun install
-bun run verify   # format check + lint + typecheck + build (all packages and fixtures)
+bun run verify   # format check, lint, typecheck, build
 ```
 
-Other scripts: `format`, `lint`, `lint:fix`, `check`, `typecheck`, `build`, `registry:build`, `registry:validate`, `test:fixtures`, `taze`, `changeset`, `version-packages`, `release`. Git hooks (Lefthook) run oxlint and oxfmt on staged files before commit and the typecheck before push.
+Other scripts: `check`, `lint:fix`, `registry:build`, `registry:validate`, `test:fixtures`, `taze`, `changeset`. Lefthook runs oxlint and oxfmt on staged files before commit and the typecheck before push.
 
 ## Using the packages
 
@@ -58,8 +58,4 @@ shadcn add @anurag/theme
 shadcn search @anurag
 ```
 
-The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our own components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's registry.
-
-`bun run registry:build` writes `r/*.json` (generated, git-ignored); `pages.yml` publishes it on every push to `main`. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/preset.json` and `shadcn add ./r/<item>.json` work locally after a build.
-
-Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.
+For addresses, pinning refs, private repos and updating (`--overwrite`), see shadcn's docs or the `shadcn` skill in `.agents/skills/shadcn`.
