@@ -1,38 +1,11 @@
-name: Bug report
-description: Report something that is broken.
-title: "[Bug]: "
+name: Bug
+description: Something is broken.
 labels: ["bug"]
 body:
   - type: textarea
-    id: what-happened
+    id: what
     attributes:
-      label: What happened?
-      description: Describe the bug and the steps to reproduce it.
-      placeholder: |
-        1. Go to ...
-        2. Click on ...
-        3. See error ...
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-      description: What did you expect to happen instead?
-    validations:
-      required: true
-  - type: textarea
-    id: logs
-    attributes:
-      label: Screenshots or logs
-      description: Paste screenshots, console errors or network responses if available.
-  - type: dropdown
-    id: environment
-    attributes:
-      label: Environment
-      options:
-        - Production
-        - Staging
-        - Local
+      label: What happened, and what did you expect?
+      description: Steps to reproduce help.
     validations:
       required: true

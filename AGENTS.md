@@ -37,7 +37,7 @@ Add a component item: put it in `packages/ui/registry.json` with `files: [{ "pat
 
 ## Themes
 
-Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, and a README row.
+Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching item in `packages/design/registry.json` (`theme` for the default `base`, `theme-<name>` for the rest), and a README row.
 
 ## Releases
 

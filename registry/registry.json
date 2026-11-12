@@ -92,7 +92,7 @@
       "name": "github-labeler",
       "type": "registry:item",
       "title": "GitHub PR labeler",
-      "description": "Labels pull requests from the paths they change (docs, ci, dependencies, tooling).",
+      "description": "Labels pull requests from the paths they change (docs, ci, dependencies).",
       "files": [
         {
           "path": "files/github/workflows/labeler.yml",
@@ -123,7 +123,7 @@
       "name": "github-templates",
       "type": "registry:item",
       "title": "PR and issue templates",
-      "description": "A conventional-title pull request template and bug report and feature request issue forms.",
+      "description": "A short pull request template and two short issue forms (bug, idea).",
       "files": [
         {
           "path": "files/github/pull_request_template.md",
@@ -139,11 +139,6 @@
           "path": "files/github/ISSUE_TEMPLATE/feature-request.yml",
           "type": "registry:file",
           "target": "~/.github/ISSUE_TEMPLATE/feature-request.yml"
-        },
-        {
-          "path": "files/github/ISSUE_TEMPLATE/config.yml",
-          "type": "registry:file",
-          "target": "~/.github/ISSUE_TEMPLATE/config.yml"
         }
       ]
     }
