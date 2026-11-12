@@ -58,8 +58,6 @@ shadcn add @anurag/theme
 shadcn search @anurag
 ```
 
-The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our own components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's registry.
+Everything else (item addresses, pinning refs, private repos, local `./r` installs, updating with `--overwrite`) is standard shadcn CLI usage: see shadcn's docs or the `shadcn` skill in `.agents/skills/shadcn` (`cli.md`, `registry.md`). `bun run registry:build` writes `r/*.json` (git-ignored) and `pages.yml` publishes it on every push to `main`.
 
-`bun run registry:build` writes `r/*.json` (generated, git-ignored); `pages.yml` publishes it on every push to `main`. Private repositories work through your `gh` login; pin a release with `#<tag-or-sha>`, for example `imanuragbanerjee/kit/theme#<sha>`. `shadcn init ./r/preset.json` and `shadcn add ./r/<item>.json` work locally after a build.
-
-Apps update a theme by re-running `shadcn add … --overwrite` and reviewing the diff. `bun run test:fixtures` (a Turborepo task, also run weekly by `upstream.yml`) installs shadcn's latest Button into each fixture with `shadcn add` and builds each one.
+The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand); our components declare `registryDependencies: ["button"]` instead of republishing them. `bun run test:fixtures` installs shadcn's latest Button into the Next.js fixture and builds it; `upstream.yml` runs it weekly.

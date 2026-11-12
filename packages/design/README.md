@@ -2,12 +2,7 @@
 
 Private source of our theme registry items. Not published to npm: apps get a theme with the shadcn CLI.
 
-```sh
-bunx shadcn@latest init
-bunx shadcn@latest add imanuragbanerjee/kit/theme
-```
-
-`shadcn init` writes the Tailwind colour mapping; the theme item then writes its colour variables to `:root` and `.dark`. To update an app later, re-run the `add` with `--overwrite` and review the diff. Pin a release with `#<tag-or-sha>`.
+Apps install a theme with the shadcn CLI (`shadcn add imanuragbanerjee/kit/theme`); see the root README.
 
 | Theme      | Contents                                  |
 | ---------- | ----------------------------------------- |
