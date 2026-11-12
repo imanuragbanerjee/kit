@@ -1,9 +1,9 @@
-# @anuragbanerjee/theme
+# @anuragbanerjee/design
 
 Tailwind CSS v4 theme: the shadcn colour mapping, fonts and colour themes. CSS only, no build step.
 
 ```sh
-bun add @anuragbanerjee/theme tailwindcss
+bun add @anuragbanerjee/design tailwindcss
 # optional peers: fonts
 bun add @fontsource-variable/geist @fontsource-variable/geist-mono
 # for shadcn components that animate (Dialog, Select, ...)
@@ -15,10 +15,10 @@ bun add tw-animate-css shadcn
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@import "@anuragbanerjee/theme/base";
-@import "@anuragbanerjee/theme/fonts"; /* optional, needs the fontsource peers */
-@import "@anuragbanerjee/theme/themes/base";
-@import "@anuragbanerjee/theme/themes/personal";
+@import "@anuragbanerjee/design/base";
+@import "@anuragbanerjee/design/fonts"; /* optional, needs the fontsource peers */
+@import "@anuragbanerjee/design/themes/base";
+@import "@anuragbanerjee/design/themes/personal";
 ```
 
 | Import            | Contents                                                            |

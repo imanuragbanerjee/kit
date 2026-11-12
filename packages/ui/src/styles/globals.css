@@ -2,6 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@import "@anuragbanerjee/theme/base";
-@import "@anuragbanerjee/theme/fonts";
-@import "@anuragbanerjee/theme/themes/base";
+@import "@anuragbanerjee/design/base";
+@import "@anuragbanerjee/design/fonts";
+@import "@anuragbanerjee/design/themes/base";

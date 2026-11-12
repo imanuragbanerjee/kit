@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@anuragbanerjee/theme": "workspace:*",
+    "@anuragbanerjee/design": "workspace:*",
     "@base-ui/react": "catalog:",
     "class-variance-authority": "catalog:",
     "cn": "catalog:",

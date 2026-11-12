@@ -1,5 +1,5 @@
 {
-  "name": "@anuragbanerjee/theme",
+  "name": "@anuragbanerjee/design",
   "version": "0.0.0",
   "description": "Tailwind v4 theme for personal projects: shadcn colour mapping, fonts and colour themes. CSS only.",
   "keywords": [
@@ -9,7 +9,7 @@
     "tailwindcss",
     "theme"
   ],
-  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/packages/theme#readme",
+  "homepage": "https://github.com/imanuragbanerjee/kit/tree/main/packages/design#readme",
   "bugs": {
     "url": "https://github.com/imanuragbanerjee/kit/issues"
   },
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imanuragbanerjee/kit.git",
-    "directory": "packages/theme"
+    "directory": "packages/design"
   },
   "files": [
     "*.css",

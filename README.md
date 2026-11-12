@@ -6,7 +6,7 @@ Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry
 | -------------------- | ---------------------------- | --------------- | ---------------------------------------------------------- |
 | `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next, astro) |
 | `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs, astro)        |
-| `packages/theme`     | `@anuragbanerjee/theme`      | npm             | Tailwind v4 CSS: colour mapping, fonts, typography, themes |
+| `packages/design`    | `@anuragbanerjee/design`     | npm             | Tailwind v4 CSS: colour mapping, fonts, themes             |
 | `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)             |
 | `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js and Astro apps that consume it             |
 
@@ -25,11 +25,11 @@ Other scripts: `format`, `lint`, `lint:fix`, `check`, `typecheck`, `build`, `reg
 
 ## Using the packages
 
-See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsconfig](tooling/tsconfig/README.md), [theme](packages/theme/README.md).
+See the README in each package: [oxc-config](tooling/oxc-config/README.md), [tsconfig](tooling/tsconfig/README.md), [design](packages/design/README.md).
 
 ## Using the registry
 
-`registry.json` at the repo root includes `packages/ui/registry.json` (our components) and `packages/theme/registry.json` (themes). The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's own registry in the consumer's style (`base-vega`).
+`registry.json` at the repo root includes `packages/ui/registry.json` (our components) and `packages/design/registry.json` (themes). The shadcn/ui primitives in `packages/ui/src/components/ui` are vendored for development only (`bun run ui:sync`, never edited by hand) and are not republished: our components declare `registryDependencies: ["button"]` and the CLI fetches the primitive from shadcn's own registry in the consumer's style (`base-vega`).
 
 Hosted: `bun run registry:build` writes `r/*.json` (generated, git-ignored), which any static host can serve; then `shadcn add https://<host>/theme-personal.json`. Locally, `shadcn add ./r/theme-personal.json` works after a build.
 
