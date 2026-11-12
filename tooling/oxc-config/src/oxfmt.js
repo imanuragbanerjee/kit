@@ -1,6 +1,5 @@
 export const ignorePatterns = [
   ".agents",
-  ".astro",
   ".claude",
   ".next",
   ".output",
@@ -12,8 +11,6 @@ export const ignorePatterns = [
 /** @type {import("oxfmt").OxfmtConfig} */
 const config = {
   arrowParens: "always",
-  // The default "jsx" mode inserts whitespace into links in .astro files.
-  astro: { compressHTML: "html" },
   bracketSameLine: false,
   bracketSpacing: true,
   endOfLine: "lf",

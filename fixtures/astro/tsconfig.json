@@ -1,9 +1,0 @@
-{
-  "extends": "@anuragbanerjee/tsconfig/astro.json",
-  "compilerOptions": {
-    "paths": { "@/*": ["./src/*"] },
-    "types": []
-  },
-  "include": [".astro/types.d.ts", "src/**/*", "*.mjs"],
-  "exclude": ["dist"]
-}

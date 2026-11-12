@@ -1,13 +1,12 @@
 # @anuragbanerjee/tsconfig
 
-Shared `tsconfig` bases. Requires TypeScript 6 or newer. Astro projects that use `astro check` must stay on TypeScript 6.
+Shared `tsconfig` bases. Requires TypeScript 6 or newer.
 
 | File                 | Use                                             |
 | -------------------- | ----------------------------------------------- |
 | `base.json`          | Strict, bundler resolution, no emit, no `types` |
 | `react-library.json` | `base` + `react-jsx` + DOM libs                 |
 | `nextjs.json`        | `react-library` + Next.js plugin                |
-| `astro.json`         | `react-library` + React islands                 |
 
 ```json
 {

@@ -1,6 +1,6 @@
 # @anuragbanerjee/oxc-config
 
-Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react`, `next` and `astro` presets.
+Shared [oxfmt](https://oxc.rs/docs/guide/usage/formatter) and [oxlint](https://oxc.rs/docs/guide/usage/linter) presets. The lint presets compose [Ultracite](https://www.ultracite.ai)'s `core`, `react` and `next` presets.
 
 ```sh
 bun add -d @anuragbanerjee/oxc-config oxfmt oxlint oxlint-tsgolint @shadcn/lint
@@ -21,7 +21,7 @@ export default defineConfig({
 });
 ```
 
-The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` replaces the whole nested object. For `.astro` files install `@astrojs/compiler-rs`; the preset sets `astro: { compressHTML: "html" }` because the default mode inserts whitespace into links.
+The spread is shallow: overriding `sortImports` or `sortTailwindcss` replaces the whole nested object.
 
 ## oxlint
 
@@ -30,7 +30,6 @@ The spread is shallow: overriding `sortImports`, `sortTailwindcss` or `astro` re
 | `@anuragbanerjee/oxc-config/oxlint`       | Ultracite `core` plus shared rule decisions |
 | `@anuragbanerjee/oxc-config/oxlint/react` | `core` + `react` + `shadcn`                 |
 | `@anuragbanerjee/oxc-config/oxlint/next`  | `core` + `react` + `shadcn` + `next`        |
-| `@anuragbanerjee/oxc-config/oxlint/astro` | `core` + `react` + `shadcn` + `astro`       |
 
 ```ts
 // oxlint.config.ts
@@ -61,7 +60,5 @@ overrides: [
   },
 ],
 ```
-
-Ultracite's `astro` preset has no rules yet, so `oxlint/astro` currently behaves like `oxlint/react`. Oxlint lints only the script (frontmatter) of `.astro` files, not the markup.
 
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings.

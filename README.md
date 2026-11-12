@@ -1,14 +1,14 @@
 # kit
 
-Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose (Next.js and Astro are covered by fixtures).
+Personal shared repo: a Tailwind v4 theme, tooling presets and a shadcn registry. Framework-neutral on purpose; a Next.js fixture covers it.
 
-| Path                 | Package                      | Published       | What                                                       |
-| -------------------- | ---------------------------- | --------------- | ---------------------------------------------------------- |
-| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next, astro) |
-| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs, astro)        |
-| `packages/design`    | `@anuragbanerjee/design`     | npm             | Tailwind v4 CSS: colour mapping, fonts, themes             |
-| `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)             |
-| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | Minimal Next.js and Astro apps that consume it             |
+| Path                 | Package                      | Published       | What                                                |
+| -------------------- | ---------------------------- | --------------- | --------------------------------------------------- |
+| `tooling/oxc-config` | `@anuragbanerjee/oxc-config` | npm             | oxfmt preset and oxlint presets (core, react, next) |
+| `tooling/tsconfig`   | `@anuragbanerjee/tsconfig`   | npm             | tsconfig bases (base, react-library, nextjs)        |
+| `packages/design`    | `@anuragbanerjee/design`     | npm             | Tailwind v4 CSS: colour mapping, fonts, themes      |
+| `packages/ui`        | `@anuragbanerjee/ui`         | never (private) | Home of our own registry components (none yet)      |
+| `fixtures/*`         | `@anuragbanerjee/fixture-*`  | never (private) | A minimal Next.js app that consumes it              |
 
 Not published to npm yet.
 

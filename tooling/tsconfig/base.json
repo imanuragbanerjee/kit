@@ -29,7 +29,6 @@
     "${configDir}/dist",
     "${configDir}/build",
     "${configDir}/.next",
-    "${configDir}/.astro",
     "${configDir}/.output"
   ]
 }

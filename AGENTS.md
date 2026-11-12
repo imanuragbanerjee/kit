@@ -1,14 +1,14 @@
 # kit: agent reference
 
-Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](README.md). Keep everything framework-neutral: no Next-only or Astro-only code in the packages.
+Personal monorepo (Bun workspaces, Turborepo, Changesets). See [README.md](README.md). Keep everything framework-neutral: no Next-only code in the packages.
 
 ## Layout
 
-- `tooling/oxc-config`: oxfmt preset (spread it, oxfmt has no `extends`) and oxlint presets `./oxlint`, `./oxlint/{react,next,astro}`. Raw JS plus hand-written `.d.ts`, no build. The framework presets include Ultracite's `shadcn` preset, so every project that lints with them needs `@shadcn/lint` installed.
+- `tooling/oxc-config`: oxfmt preset (spread it, oxfmt has no `extends`) and oxlint presets `./oxlint`, `./oxlint/{react,next}`. Raw JS plus hand-written `.d.ts`, no build. The framework presets include Ultracite's `shadcn` preset, so every project that lints with them needs `@shadcn/lint` installed.
 - `tooling/tsconfig`: JSON bases; consumers set `include`, `paths` and `types`.
 - `packages/design`: CSS only; every export lists `style` and `default` conditions.
 - `packages/ui` (private): our own components and `registry.json`, plus the vendored shadcn primitives in `src/components/ui`.
-- `fixtures/*` (private): Next.js and Astro apps; their `src/components/ui/button.tsx` comes from `shadcn add`.
+- `fixtures/*` (private): a Next.js app; their `src/components/ui/button.tsx` comes from `shadcn add`.
 - Root `registry.json` only has `name`, `homepage` and `include`.
 
 Folder names match the package name suffix. Files and folders are kebab-case.
@@ -19,9 +19,7 @@ Folder names match the package name suffix. Files and folders are kebab-case.
 - Exact Node and Bun versions live only in `.tool-versions`; `package.json` has `devEngines` ranges.
 - Bun uses the isolated linker: a package can only import what it declares.
 - Every external version lives once in `workspaces.catalog` (use `catalog:`). Peer ranges and `dependencies` of published packages stay explicit.
-- TypeScript 7 everywhere except `fixtures/astro`, which pins 6 because `astro check` does not support 7 (the upstream issues are closed without real support).
 - `options.typeAware` only works in the root oxlint config; nested configs (fixtures) use their own preset. Presets cannot carry `ignorePatterns`, so they are exported.
-- `.astro` formatting needs `@astrojs/compiler-rs` and `astro: { compressHTML: "html" }`.
 - Compose with Base UI's `render` prop (`nativeButton={false}` for non-buttons), never `asChild`. No coss ui or other third-party registry dependency.
 - Reference public projects (shadcn-ui/ui, shadcn-ui/lint, Ultracite), not company-internal repos.
 - Commits: `chore:` / `feat:` / `fix:`, small and logical.

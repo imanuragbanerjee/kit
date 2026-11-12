@@ -1,7 +1,7 @@
 {
   "name": "@anuragbanerjee/oxc-config",
   "version": "0.0.0",
-  "description": "Shared oxfmt and oxlint presets (core, React, Next.js, Astro, shadcn) for personal projects.",
+  "description": "Shared oxfmt and oxlint presets (core, React, Next.js, shadcn) for personal projects.",
   "keywords": [
     "config",
     "oxc",
@@ -41,10 +41,6 @@
       "types": "./src/oxlint-next.d.ts",
       "default": "./src/oxlint-next.js"
     },
-    "./oxlint/astro": {
-      "types": "./src/oxlint-astro.d.ts",
-      "default": "./src/oxlint-astro.js"
-    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -65,16 +61,12 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@astrojs/compiler-rs": ">=0.5.3 <1",
     "@shadcn/lint": ">=0.2.5 <1",
     "oxfmt": ">=0.78.0 <1",
     "oxlint": "^1.93.0",
     "oxlint-tsgolint": ">=7.0.2006"
   },
   "peerDependenciesMeta": {
-    "@astrojs/compiler-rs": {
-      "optional": true
-    },
     "@shadcn/lint": {
       "optional": true
     },

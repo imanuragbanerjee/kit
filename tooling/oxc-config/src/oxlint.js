@@ -9,7 +9,6 @@ export const ignorePatterns = [
 /** @type {NonNullable<import("oxlint").OxlintConfig["rules"]>}
  */
 export const rules = {
-  // `export const GET: APIRoute = ...` (Astro) is idiomatic as an expression.
   "eslint/func-style": "off",
   // Key order is deliberate in JSON-LD, content schemas and config objects.
   "eslint/sort-keys": "off",
