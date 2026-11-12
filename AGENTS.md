@@ -33,11 +33,11 @@ For registry authoring and CLI usage follow the `shadcn` skill (`.agents/skills/
 
 ## Agent skills
 
-Installed with the skills.sh CLI (`.agents/skills`, symlinked from `.claude/skills`, locked in `skills-lock.json`). Update with `bunx skills update`; they are third-party files, so do not edit them and keep them out of oxfmt and oxlint.
+Installed with the skills.sh CLI (`.agents/skills`, symlinked from `.claude/skills`, locked in `skills-lock.json`). Update with `bunx skills update`; they are third-party files, so do not edit them and keep them out of oxfmt and oxlint. Our own skills live in `skills/<name>/SKILL.md`; edit them there, then reinstall with `bunx skills add . --skill <name> --yes`.
 
 ## Releases
 
-Published to npm: `tooling/oxfmt-config`, `tooling/oxlint-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with `bun run changeset`; `release.yml` runs on every push to `main` and is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
+Published to npm: `tooling/oxfmt-config`, `tooling/oxlint-config` and `tooling/tsconfig`; themes only through the registry. Add a changeset with the `changeset` skill (or `bun run changeset`); `release.yml` runs on every push to `main` and is described in `.github/RELEASING.md`. Everything runs on Bun except publishing, which uses npm (trusted publishing and provenance are npm features). Never publish by hand or from an agent session.
 
 ## Safety
 

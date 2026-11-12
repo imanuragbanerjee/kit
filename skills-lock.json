@@ -1,6 +1,11 @@
 {
   "version": 2,
   "skills": {
+    "changeset": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "c9da74b52d570ea87aa2a22097975af88ad8068217272c05aa5681ee36afdad6"
+    },
     "shadcn": {
       "source": "shadcn-ui/ui",
       "sourceType": "github",
