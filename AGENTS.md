@@ -41,7 +41,7 @@ Installed with the skills.sh CLI into `.agents/skills` (symlinked from `.claude/
 
 ## Themes
 
-Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching `theme-<name>` item in `packages/design/registry.json`, and a README row.
+Add `packages/design/themes/<name>.css` (light on `:root`, dark on `.dark`; an app imports exactly one theme), a matching item in `packages/design/registry.json` (`theme` for the default `base`, `theme-<name>` for the rest), and a README row.
 
 ## Releases
 
