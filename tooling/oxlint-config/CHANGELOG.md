@@ -1,5 +1,11 @@
 # @anuragbanerjee/oxlint-config
 
+## 0.1.2
+
+### Patch Changes
+
+- [#19](https://github.com/imanuragbanerjee/kit/pull/19) [`26c5e2c`](https://github.com/imanuragbanerjee/kit/commit/26c5e2c25059dea9c1c72558d4c1fe2bed1be6b7) Thanks [@imanuragbanerjee](https://github.com/imanuragbanerjee)! - The `next` preset turns off `eslint/require-await` for `next.config.*`, since Next's async `headers()`, `redirects()` and `rewrites()` have nothing to await.
+
 ## 0.1.1
 
 ### Patch Changes
