@@ -22,7 +22,7 @@
       ],
       "registryDependencies": [
         "font-geist",
-        "geist-mono",
+        "imanuragbanerjee/kit/geist-mono",
         "imanuragbanerjee/kit/personal"
       ],
       "css": {
