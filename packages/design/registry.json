@@ -22,13 +22,28 @@
       ],
       "registryDependencies": [
         "font-geist",
-        "font-geist-mono",
+        "imanuragbanerjee/kit/geist-mono",
         "imanuragbanerjee/kit/personal"
       ],
       "css": {
         "@import \"tw-animate-css\"": {}
       },
       "docs": "Run `shadcn add button` (or any primitive) next; it installs from shadcn's registry in the base-vega style."
+    },
+    {
+      "name": "geist-mono",
+      "type": "registry:font",
+      "title": "Geist Mono",
+      "description": "Geist Mono as --font-mono for code only; unlike shadcn's font-geist-mono it does not become the site-wide default.",
+      "font": {
+        "family": "'Geist Mono Variable', monospace",
+        "provider": "google",
+        "import": "Geist_Mono",
+        "variable": "--font-mono",
+        "subsets": ["latin"],
+        "selector": "code, kbd, pre, samp",
+        "dependency": "@fontsource-variable/geist-mono"
+      }
     },
     {
       "name": "theme",
