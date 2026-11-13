@@ -20,4 +20,4 @@ Files here:
 - `base.css`: the `@theme inline` colour and radius mapping, dark variant and base layer. The Next fixture and `packages/ui` import it.
 - `fonts.css`: Geist Sans and Mono through Fontsource, imported by the fixture.
 
-The `preset` item lists `font-geist-mono` before `font-geist` on purpose: `shadcn init` makes the last font item the site-wide default, so Geist Sans stays the body font and Geist Mono is only available as `--font-mono`. Keep that order.
+The `preset` item uses our own `geist-mono` font item instead of shadcn's `font-geist-mono`. `shadcn init` makes every font item the site-wide default unless the item sets a `selector`; ours sets `code, kbd, pre, samp`, so Geist Sans stays the body font and Geist Mono is `--font-mono` for code.
