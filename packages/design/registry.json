@@ -21,8 +21,8 @@
         "tw-animate-css"
       ],
       "registryDependencies": [
-        "font-geist",
         "font-geist-mono",
+        "font-geist",
         "imanuragbanerjee/kit/personal"
       ],
       "css": {

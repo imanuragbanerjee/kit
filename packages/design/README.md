@@ -19,3 +19,5 @@ Files here:
 - `themes/*.css` and `registry.json`: the two palettes as CSS and as `registry:theme` items. Keep them identical.
 - `base.css`: the `@theme inline` colour and radius mapping, dark variant and base layer. The Next fixture and `packages/ui` import it.
 - `fonts.css`: Geist Sans and Mono through Fontsource, imported by the fixture.
+
+The `preset` item lists `font-geist-mono` before `font-geist` on purpose: `shadcn init` makes the last font item the site-wide default, so Geist Sans stays the body font and Geist Mono is only available as `--font-mono`. Keep that order.
