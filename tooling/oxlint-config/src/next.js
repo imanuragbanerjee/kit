@@ -9,6 +9,13 @@ import { reactRules, rules } from "./index.js";
 const config = {
   extends: [core, react, shadcn, next],
   rules: { ...rules, ...reactRules },
+  overrides: [
+    {
+      // `headers()`, `redirects()` and `rewrites()` are async by contract and have nothing to await.
+      files: ["**/next.config.*"],
+      rules: { "eslint/require-await": "off" },
+    },
+  ],
 };
 
 export default config;
