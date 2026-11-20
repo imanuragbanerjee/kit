@@ -1,5 +1,11 @@
 # @anuragbanerjee/oxlint-config
 
+## 0.2.0
+
+### Minor Changes
+
+- [#22](https://github.com/imanuragbanerjee/kit/pull/22) [`0b74bbf`](https://github.com/imanuragbanerjee/kit/commit/0b74bbf74aa21a4fefbef1431c103dc3cdb41afa) Thanks [@imanuragbanerjee](https://github.com/imanuragbanerjee)! - Add an opt-in `@anuragbanerjee/oxlint-config/anti-slop` preset: Ultracite's anti-slop rules, with `require-readable-spacing` and `no-shape-in-symbol-names` off. List it after a framework preset in `extends`.
+
 ## 0.1.2
 
 ### Patch Changes
