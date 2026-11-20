@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "description": "Shared oxlint presets (core, React, Next.js) with Ultracite and shadcn/lint rules.",
   "keywords": [
+    "anti-slop",
     "config",
     "oxc",
     "oxlint",
@@ -36,6 +37,10 @@
     "./next": {
       "types": "./src/next.d.ts",
       "default": "./src/next.js"
+    },
+    "./anti-slop": {
+      "types": "./src/anti-slop.d.ts",
+      "default": "./src/anti-slop.js"
     },
     "./package.json": "./package.json"
   },
