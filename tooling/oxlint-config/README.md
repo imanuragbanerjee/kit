@@ -10,11 +10,12 @@ bun add -d @anuragbanerjee/oxlint-config oxlint oxlint-tsgolint @shadcn/lint
 
 ## Presets
 
-| Import                                | Contents                                    |
-| ------------------------------------- | ------------------------------------------- |
-| `@anuragbanerjee/oxlint-config`       | Ultracite `core` plus shared rule decisions |
-| `@anuragbanerjee/oxlint-config/react` | `core` + `react` + `shadcn`                 |
-| `@anuragbanerjee/oxlint-config/next`  | `core` + `react` + `shadcn` + `next`        |
+| Import                                    | Contents                                                    |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| `@anuragbanerjee/oxlint-config`           | Ultracite `core` plus shared rule decisions                 |
+| `@anuragbanerjee/oxlint-config/react`     | `core` + `react` + `shadcn`                                 |
+| `@anuragbanerjee/oxlint-config/next`      | `core` + `react` + `shadcn` + `next`                        |
+| `@anuragbanerjee/oxlint-config/anti-slop` | Opt-in [anti-slop](#anti-slop) rules, listed after a preset |
 
 ## Usage
 
@@ -51,5 +52,20 @@ overrides: [
 ```
 
 Shared decisions: `eslint/sort-keys` and `eslint/func-style` are off, and `typescript/strict-boolean-expressions` allows nullable booleans, numbers and strings. The `next` preset also turns off `eslint/require-await` for `next.config.*`.
+
+## anti-slop
+
+Opt-in: Ultracite's bundled build of [anti-slop](https://github.com/dmmulroy/anti-slop), which rejects low-evidence patterns such as unjustified type assertions, `unknown` in signatures, `Reflect.get` and module mocking. It runs as a JS plugin and needs no extra install. List it after the framework preset, because it turns off three core rules that conflict with it (`typescript/consistent-indexed-object-style`, `unicorn/no-immediate-mutation` and `unicorn/prefer-reflect-apply`):
+
+```ts
+import antiSlop from "@anuragbanerjee/oxlint-config/anti-slop";
+import next from "@anuragbanerjee/oxlint-config/next";
+
+export default defineConfig({
+  extends: [next, antiSlop],
+});
+```
+
+Shared decisions: `anti-slop/require-readable-spacing` and `anti-slop/no-shape-in-symbol-names` are off. The first only adds blank lines and `oxlint --fix` applies it, so set it to `"error"` if you want it. `no-known-value-widening` and `no-unsafe-dictionary-type` flag `Record<string, unknown>` return types; for open-ended output such as JSON-LD, turn them off for those files with an override.
 
 Part of [kit](https://github.com/imanuragbanerjee/kit).
